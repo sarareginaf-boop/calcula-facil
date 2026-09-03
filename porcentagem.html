@@ -1,1 +1,96 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Calculadora de Porcentagem | Calcula Fácil</title><link rel="stylesheet" href="style.css"></head><body><header class="topo"><a class="marca" href="index.html">Calcula <span>Fácil</span></a><p>Ferramentas simples para decisões do dia a dia</p></header><main><section class="hero"><p class="etiqueta">FERRAMENTA GRATUITA</p><h1>Calculadora de porcentagem</h1><p>Calcule porcentagens, descontos, aumentos e diferenças de valores.</p></section><section class="grade"><section class="cartao wide"><div class="abas"><button class="aba ativa" data-painel="p1">X% de um valor</button><button class="aba" data-painel="p2">Desconto ou aumento</button><button class="aba" data-painel="p3">Diferença percentual</button></div><form id="p1" class="painel"><label>Qual porcentagem?<input id="perc" type="number" value="15" step="0.01"></label><label>De qual valor?<input id="base" type="number" value="800" step="0.01"></label><button>Calcular</button></form><form id="p2" class="painel" hidden><label>Valor inicial<input id="valor2" type="number" value="800" step="0.01"></label><label>Porcentagem<input id="perc2" type="number" value="15" step="0.01"></label><label>Operação<select id="operacao"><option value="desconto">Desconto</option><option value="aumento">Aumento</option></select></label><button>Calcular</button></form><form id="p3" class="painel" hidden><label>Valor inicial<input id="inicial" type="number" value="800" step="0.01"></label><label>Valor final<input id="final" type="number" value="920" step="0.01"></label><button>Calcular</button></form></section><section class="cartao resultado"><h2>Resultado</h2><div id="pResultado">Escolha uma opção e calcule.</div></section></section><section class="explicacao"><h2>Porcentagens sem complicação</h2><p>Use esta ferramenta para descontos em compras, acréscimos, comissões e comparações entre valores.</p></section></main><footer>© <span class="ano"></span> Calcula Fácil</footer><script src="porcentagem.js"></script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Calculadora de Porcentagem | Calcula Fácil</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topo">
+      <a class="marca" href="index.html">Calcula <span>Fácil</span></a>
+      <p>Ferramentas simples para decisões do dia a dia</p>
+    </header>
+    <main>
+      <section class="hero">
+        <p class="etiqueta">FERRAMENTA GRATUITA</p>
+        <h1>Calculadora de porcentagem</h1>
+        <p>
+          Calcule porcentagens, descontos, aumentos e diferenças de valores.
+        </p>
+      </section>
+      <section class="grade">
+        <section class="cartao wide">
+          <div class="abas">
+            <button class="aba ativa" data-painel="p1">X% de um valor</button
+            ><button class="aba" data-painel="p2">Desconto ou aumento</button
+            ><button class="aba" data-painel="p3">Diferença percentual</button>
+          </div>
+          <form id="p1" class="painel">
+            <label
+              >Qual porcentagem?<input
+                id="perc"
+                type="number"
+                placeholder="Ex.: 15"
+                step="0.01" /></label
+            ><label
+              >De qual valor?<input
+                id="base"
+                type="number"
+                placeholder="Ex.: 800"
+                step="0.01" /></label
+            ><button>Calcular</button>
+          </form>
+          <form id="p2" class="painel" hidden>
+            <label
+              >Valor inicial<input
+                id="valor2"
+                type="number"
+                placeholder="Ex.: 800"
+                step="0.01" /></label
+            ><label
+              >Porcentagem<input
+                id="perc2"
+                type="number"
+                placeholder="Ex.: 15"
+                step="0.01" /></label
+            ><label
+              >Operação<select id="operacao">
+                <option value="desconto">Desconto</option>
+                <option value="aumento">Aumento</option>
+              </select></label
+            ><button>Calcular</button>
+          </form>
+          <form id="p3" class="painel" hidden>
+            <label
+              >Valor inicial<input
+                id="inicial"
+                type="number"
+                placeholder="Ex.: 800"
+                step="0.01" /></label
+            ><label
+              >Valor final<input
+                id="final"
+                type="number"
+                placeholder="Ex.: 920"
+                step="0.01" /></label
+            ><button>Calcular</button>
+          </form>
+        </section>
+        <section class="cartao resultado">
+          <h2>Resultado</h2>
+          <div id="pResultado">Escolha uma opção e calcule.</div>
+        </section>
+      </section>
+      <section class="explicacao">
+        <h2>Porcentagens sem complicação</h2>
+        <p>
+          Use esta ferramenta para descontos em compras, acréscimos, comissões e
+          comparações entre valores.
+        </p>
+      </section>
+    </main>
+    <footer>© <span class="ano"></span> Calcula Fácil</footer>
+    <script src="porcentagem.js"></script>
+  </body>
+</html>

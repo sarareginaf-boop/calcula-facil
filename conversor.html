@@ -1,56 +1,101 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Converta dólar, euro, libra e outras moedas para real com cotação atualizada.">
-  <title>Conversor de Moedas | Calcula Fácil</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="topo"><a class="marca" href="index.html">Calcula <span>Fácil</span></a><p>Ferramentas simples para decisões do dia a dia</p><a class="nav" href="index.html">Calculadora de tinta</a></header>
-  <main>
-    <section class="hero">
-      <p class="etiqueta">FERRAMENTA GRATUITA</p>
-      <h1>Conversor de moedas</h1>
-      <p>Converta valores entre real, dólar, euro, libra, peso argentino, dólar canadense e franco suíço.</p>
-    </section>
-    <aside class="anuncio">Espaço para anúncio</aside>
-    <section class="grade">
-      <form id="conversor" class="cartao">
-        <h2>Faça sua conversão</h2>
-        <div class="duas-colunas">
-          <label class="inteira">Valor<input id="valor" type="number" min="0" step="0.01" value="100" required></label>
-          <label>De<select id="de"></select></label>
-          <label>Para<select id="para"></select></label>
-        </div>
-        <details class="taxa-opcional">
-          <summary>Quer simular a taxa do seu banco?</summary>
-          <p>Consulte no aplicativo, cartão ou atendimento do seu banco qual é o spread/taxa cobrada em operações de câmbio. Se souber a porcentagem, informe abaixo para ver uma estimativa.</p>
-          <label>Taxa adicional do banco (%)<input id="taxa" type="number" min="0" step="0.01" value="0" inputmode="decimal"></label>
-        </details>
-        <button type="submit">Converter agora</button>
-      </form>
-      <section class="cartao resultado" aria-live="polite">
-        <h2>Resultado</h2>
-        <div id="aguarde">Informe o valor e clique em converter.</div>
-        <div id="resultado-conversao" hidden>
-          <p>Cotação utilizada<strong id="cotacao">—</strong></p>
-          <p>Valor convertido<strong id="convertido">—</strong></p>
-          <p id="linha-taxa" hidden>Taxa adicional<strong id="valor-taxa">—</strong></p>
-          <p id="linha-total" hidden>Total com taxa<strong id="total">—</strong></p>
-          <small id="atualizacao"></small>
-        </div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Converta dólar, euro, libra e outras moedas para real com cotação atualizada."
+    />
+    <title>Conversor de Moedas | Calcula Fácil</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topo">
+      <a class="marca" href="index.html">Calcula <span>Fácil</span></a>
+      <p>Ferramentas simples para decisões do dia a dia</p>
+      <a class="nav" href="index.html">Calculadora de tinta</a>
+    </header>
+    <main>
+      <section class="hero">
+        <p class="etiqueta">FERRAMENTA GRATUITA</p>
+        <h1>Conversor de moedas</h1>
+        <p>
+          Converta valores entre real, dólar, euro, libra, peso argentino, dólar
+          canadense e franco suíço.
+        </p>
       </section>
-    </section>
-    <aside class="anuncio">Espaço para anúncio</aside>
-    <section class="explicacao">
-      <h2>Sobre a cotação e as taxas</h2>
-      <p>O conversor usa uma cotação de referência fornecida por fonte externa. Bancos, cartões, casas de câmbio e plataformas de remessa podem aplicar spread, impostos e tarifas próprios. A taxa adicional é opcional para você simular esse custo.</p>
-      <p>O resultado é informativo e não substitui a cotação final apresentada pela instituição financeira no momento da operação.</p>
-    </section>
-  </main>
-  <footer>© <span id="ano"></span> Calcula Fácil · <a href="#">Privacidade</a> · <a href="#">Sobre</a></footer>
-  <script src="conversor.js"></script>
-</body>
+      <aside class="anuncio">Espaço para anúncio</aside>
+      <section class="grade">
+        <form id="conversor" class="cartao">
+          <h2>Faça sua conversão</h2>
+          <div class="duas-colunas">
+            <label class="inteira"
+              >Valor<input
+                id="valor"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="Ex.: 100"
+                required
+            /></label>
+            <label>De<select id="de"></select></label>
+            <label>Para<select id="para"></select></label>
+          </div>
+          <details class="taxa-opcional">
+            <summary>Quer simular a taxa do seu banco?</summary>
+            <p>
+              Consulte no aplicativo, cartão ou atendimento do seu banco qual é
+              o spread/taxa cobrada em operações de câmbio. Se souber a
+              porcentagem, informe abaixo para ver uma estimativa.
+            </p>
+            <label
+              >Taxa adicional do banco (%)<input
+                id="taxa"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="Ex.: 2,5"
+                inputmode="decimal"
+            /></label>
+          </details>
+          <button type="submit">Converter agora</button>
+        </form>
+        <section class="cartao resultado" aria-live="polite">
+          <h2>Resultado</h2>
+          <div id="aguarde">Informe o valor e clique em converter.</div>
+          <div id="resultado-conversao" hidden>
+            <p>Cotação utilizada<strong id="cotacao">—</strong></p>
+            <p>Valor convertido<strong id="convertido">—</strong></p>
+            <p id="linha-taxa" hidden>
+              Taxa adicional<strong id="valor-taxa">—</strong>
+            </p>
+            <p id="linha-total" hidden>
+              Total com taxa<strong id="total">—</strong>
+            </p>
+            <small id="atualizacao"></small>
+          </div>
+        </section>
+      </section>
+      <aside class="anuncio">Espaço para anúncio</aside>
+      <section class="explicacao">
+        <h2>Sobre a cotação e as taxas</h2>
+        <p>
+          O conversor usa uma cotação de referência fornecida por fonte externa.
+          Bancos, cartões, casas de câmbio e plataformas de remessa podem
+          aplicar spread, impostos e tarifas próprios. A taxa adicional é
+          opcional para você simular esse custo.
+        </p>
+        <p>
+          O resultado é informativo e não substitui a cotação final apresentada
+          pela instituição financeira no momento da operação.
+        </p>
+      </section>
+    </main>
+    <footer>
+      © <span id="ano"></span> Calcula Fácil · <a href="#">Privacidade</a> ·
+      <a href="#">Sobre</a>
+    </footer>
+    <script src="conversor.js"></script>
+  </body>
 </html>
