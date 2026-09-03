@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Calcule seu IMC online de forma simples."
+    />
+    <title>Calculadora de IMC | Calcula Fácil</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topo">
+      <a class="marca" href="index.html">Calcula <span>Fácil</span></a>
+      <p>Ferramentas simples para decisões do dia a dia</p>
+    </header>
+    <main>
+      <section class="hero hero-ferramenta">
+        <div>
+          <p class="etiqueta">FERRAMENTA GRATUITA</p>
+          <h1>Calculadora de IMC</h1>
+          <p>
+            Informe peso e altura para obter uma referência do Índice de Massa
+            Corporal.
+          </p>
+        </div>
+        <img
+          src="imagem-dia-a-dia.png"
+          alt="Ilustração de calendário e aniversário"
+        />
+      </section>
+      <section class="grade">
+        <form id="imc" class="cartao">
+          <h2>Seus dados</h2>
+          <label
+            >Peso (kg)<input
+              id="peso"
+              type="number"
+              min="1"
+              step="0.1"
+              placeholder="Ex.: 65"
+              required /></label
+          ><label
+            >Altura (m)<input
+              id="altura"
+              type="number"
+              min="0.5"
+              step="0.01"
+              placeholder="Ex.: 1,65"
+              required /></label
+          ><button>Calcular IMC</button>
+        </form>
+        <section class="cartao resultado">
+          <h2>Resultado</h2>
+          <div id="imcResultado">Preencha os dados e calcule.</div>
+        </section>
+      </section>
+      <section class="explicacao">
+        <h2>Importante</h2>
+        <p>
+          O IMC é uma referência geral para adultos e não substitui avaliação de
+          profissional de saúde. Gestantes, crianças, adolescentes, idosos e
+          atletas podem precisar de outros critérios.
+        </p>
+      </section>
+    </main>
+    <footer>© <span class="ano"></span> Calcula Fácil</footer>
+    <script src="imc.js"></script>
+  </body>
+</html>

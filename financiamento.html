@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Simulador de financiamento e empréstimo com tabelas Price e SAC."
+    />
+    <title>Financiamento e Empréstimos | Calcula Fácil</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topo">
+      <a class="marca" href="index.html">Calcula <span>Fácil</span></a>
+      <p>Ferramentas simples para decisões do dia a dia</p>
+    </header>
+    <main>
+      <section class="hero hero-ferramenta">
+        <div>
+          <p class="etiqueta">SIMULADOR GRATUITO</p>
+          <h1>Financiamento e empréstimos</h1>
+          <p>
+            Compare uma estimativa inicial de parcelas pela tabela Price ou SAC.
+          </p>
+        </div>
+        <img
+          src="imagem-financas.png"
+          alt="Ilustração de moedas e calculadora"
+        />
+      </section>
+      <section class="grade">
+        <form id="financiamento" class="cartao">
+          <h2>Dados da simulação</h2>
+          <label
+            >Valor financiado (R$)<input
+              id="valor"
+              type="number"
+              min="1"
+              step="0.01"
+              placeholder="Ex.: 100.000"
+              required /></label
+          ><label
+            >Taxa de juros ao mês (%)<input
+              id="taxa"
+              type="number"
+              min="0"
+              step="0.01"
+              placeholder="Ex.: 1"
+              required /></label
+          ><label
+            >Prazo em meses<input
+              id="prazo"
+              type="number"
+              min="1"
+              step="1"
+              placeholder="Ex.: 120"
+              required /></label
+          ><label
+            >Sistema<select id="sistema">
+              <option value="price">Price — parcelas iguais</option>
+              <option value="sac">SAC — parcelas decrescentes</option>
+            </select></label
+          ><button>Simular parcelas</button>
+        </form>
+        <section class="cartao resultado">
+          <h2>Estimativa</h2>
+          <div id="fResultado">Preencha os dados e simule.</div>
+        </section>
+      </section>
+      <section class="explicacao">
+        <h2>Importante</h2>
+        <p>
+          É uma estimativa matemática. Tarifas, seguros, impostos, CET e
+          condições do banco podem alterar bastante o valor final da operação.
+        </p>
+      </section>
+    </main>
+    <footer>© <span class="ano"></span> Calcula Fácil</footer>
+    <script src="financiamento.js"></script>
+  </body>
+</html>

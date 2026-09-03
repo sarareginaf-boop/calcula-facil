@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Calculadora de rodapé: estime metros lineares e peças, descontando portas e passagens."
+    />
+    <title>Calculadora de Rodapé | Calcula Fácil</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topo">
+      <a class="marca" href="index.html">Calcula <span>Fácil</span></a>
+      <p>Ferramentas simples para decisões do dia a dia</p>
+    </header>
+    <main>
+      <section class="hero hero-ferramenta">
+        <div>
+          <p class="etiqueta">FERRAMENTA GRATUITA</p>
+          <h1>Calculadora de rodapé</h1>
+          <p>
+            Calcule a quantidade de rodapé para qualquer ambiente e desconte
+            portas e passagens.
+          </p>
+        </div>
+        <img
+          src="imagem-construcao.png"
+          alt="Ilustração de piso e fita métrica"
+        />
+      </section>
+      <section class="grade">
+        <form id="rodape" class="cartao">
+          <h2>Medidas</h2>
+          <label
+            >Perímetro do ambiente (m)<input
+              id="perimetro"
+              type="number"
+              min="0"
+              step="0.01"
+              placeholder="Ex.: 18"
+              required /></label
+          ><label
+            >Vãos de portas e passagens (m)<input
+              id="vaos"
+              type="number"
+              min="0"
+              step="0.01"
+              placeholder="Ex.: 2,40"
+              required /></label
+          ><label
+            >Comprimento de cada peça (m)<input
+              id="comprimento"
+              type="number"
+              min="0.01"
+              step="0.01"
+              placeholder="Ex.: 2,40"
+              required /></label
+          ><label
+            >Margem para recortes (%)<input
+              id="perda"
+              type="number"
+              min="0"
+              step="0.1"
+              placeholder="Ex.: 10"
+              required /></label
+          ><button>Calcular rodapé</button>
+        </form>
+        <section class="cartao resultado">
+          <h2>Estimativa</h2>
+          <div id="rodResultado">Preencha os dados e calcule.</div>
+        </section>
+      </section>
+      <section class="explicacao">
+        <h2>Dica</h2>
+        <p>
+          Meça todo o contorno onde haverá rodapé. Desconte portas, passagens e
+          outros trechos sem rodapé. A margem ajuda a cobrir recortes e perdas.
+        </p>
+      </section>
+    </main>
+    <footer>© <span class="ano"></span> Calcula Fácil</footer>
+    <script src="rodape.js"></script>
+  </body>
+</html>
