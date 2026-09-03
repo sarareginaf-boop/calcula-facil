@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Simulador de férias, décimo terceiro e FGTS."
+    />
+    <title>Calculadora Trabalhista | Calcula Fácil</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topo">
+      <a class="marca" href="index.html">Calcula <span>Fácil</span></a>
+      <p>Ferramentas simples para decisões do dia a dia</p>
+    </header>
+    <main>
+      <section class="hero hero-ferramenta">
+        <div>
+          <p class="etiqueta">SIMULADOR GRATUITO</p>
+          <h1>Calculadora trabalhista</h1>
+          <p>
+            Faça uma estimativa de décimo terceiro, férias e depósito mensal de
+            FGTS.
+          </p>
+        </div>
+        <img
+          src="imagem-financas.png"
+          alt="Ilustração de moedas e calculadora"
+        />
+      </section>
+      <section class="grade">
+        <form id="trabalhista" class="cartao">
+          <h2>Informações</h2>
+          <label
+            >Salário bruto mensal (R$)<input
+              id="salario"
+              type="number"
+              min="1"
+              step="0.01"
+              placeholder="Ex.: 2.500"
+              required /></label
+          ><label
+            >Meses trabalhados no ano<input
+              id="meses"
+              type="number"
+              min="1"
+              max="12"
+              step="1"
+              placeholder="Ex.: 12"
+              required /></label
+          ><button>Calcular estimativa</button>
+        </form>
+        <section class="cartao resultado">
+          <h2>Estimativa bruta</h2>
+          <div id="tResultado">Preencha os dados e calcule.</div>
+        </section>
+      </section>
+      <section class="explicacao">
+        <h2>Atenção</h2>
+        <p>
+          Esta ferramenta é apenas uma estimativa bruta. Rescisão, descontos,
+          aviso prévio, adicionais, convenção coletiva, INSS e IR dependem do
+          vínculo e das regras vigentes. Confirme com RH, contador ou
+          profissional especializado.
+        </p>
+      </section>
+    </main>
+    <footer>© <span class="ano"></span> Calcula Fácil</footer>
+    <script src="trabalhista.js"></script>
+  </body>
+</html>
