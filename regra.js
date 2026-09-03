@@ -1,0 +1,1 @@
+regra.onsubmit=e=>{e.preventDefault();let x=+b.value*+c.value/+a.value;rResultado.innerHTML=Number.isFinite(x)?`<p>O valor de <strong>X é ${x.toLocaleString('pt-BR',{maximumFractionDigits:4})}</strong>.</p>`:'Informe valores válidos e A diferente de zero.'};document.querySelectorAll('.ano').forEach(x=>x.textContent=new Date().getFullYear());
