@@ -74,7 +74,7 @@ footer {
 
 .hero-ferramenta {
   display: grid;
-  grid-template-columns: 1fr 180px;
+  grid-template-columns: minmax(0, 1fr) minmax(190px, 240px);
   gap: 24px;
   align-items: center;
   padding-top: 34px;
@@ -83,8 +83,9 @@ footer {
 
 .hero-ferramenta img {
   width: 100%;
-  max-height: 155px;
+  height: 190px;
   object-fit: contain;
+  object-position: center;
 }
 .hero-ilustracao {
   width: 100%;
@@ -391,8 +392,13 @@ footer a {
     padding-top: 38px;
   }
   .hero-ferramenta {
-    grid-template-columns: 1fr 120px;
-    gap: 12px;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .hero-ferramenta img {
+    width: 180px;
+    height: 150px;
+    justify-self: center;
   }
   .hero-ilustracao {
     max-height: 220px;
