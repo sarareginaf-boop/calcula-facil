@@ -175,6 +175,9 @@ h2 {
   grid-template-columns: 1fr 1fr;
   gap: 15px;
 }
+[hidden] {
+  display: none !important;
+}
 label {
   font-weight: 650;
   font-size: 0.9rem;
