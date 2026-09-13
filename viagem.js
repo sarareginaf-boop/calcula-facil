@@ -8,7 +8,7 @@ const unidadeConsumo = document.getElementById("unidadeConsumo");
 const preco = document.getElementById("preco");
 const unidadePreco = document.getElementById("unidadePreco");
 const moeda = document.getElementById("moeda");
-const pessoas = document.getElementById("pessoas");
+const pedagios = document.getElementById("pedagios");
 const GALAO_US_LITROS = 3.785411784;
 const MILHA_KM = 1.609344;
 
@@ -22,9 +22,9 @@ form.addEventListener("submit", (evento) => {
   const distanciaInformada = Number(distancia.value);
   const consumoInformado = Number(consumo.value);
   const precoInformado = Number(preco.value);
-  const quantidadePessoas = Number(pessoas.value);
-  if (![distanciaInformada, consumoInformado, precoInformado, quantidadePessoas].every((n) => Number.isFinite(n) && n > 0)) {
-    resultado.textContent = "Informe valores maiores que zero.";
+  const totalPedagios = Number(pedagios.value);
+  if (![distanciaInformada, consumoInformado, precoInformado].every((n) => Number.isFinite(n) && n > 0) || !Number.isFinite(totalPedagios) || totalPedagios < 0) {
+    resultado.textContent = "Confira os valores informados.";
     return;
   }
   const distanciaKm = distanciaInformada * (unidadeDistancia.value === "mi" ? MILHA_KM : 1) * Number(trajeto.value);
@@ -32,7 +32,8 @@ form.addEventListener("submit", (evento) => {
   if (unidadeConsumo.value === "kml") litros = distanciaKm / consumoInformado;
   if (unidadeConsumo.value === "l100") litros = (distanciaKm * consumoInformado) / 100;
   if (unidadeConsumo.value === "mpg") litros = (distanciaKm / MILHA_KM / consumoInformado) * GALAO_US_LITROS;
-  const custo = precoInformado * (unidadePreco.value === "galao" ? litros / GALAO_US_LITROS : litros);
-  resultado.innerHTML = `<p>Distância total<strong>${numero(distanciaKm)} km</strong></p><p>Combustível estimado<strong>${numero(litros)} L</strong></p><p>Custo total<strong>${dinheiro(custo, moeda.value)}</strong></p><p>Custo por pessoa<strong>${dinheiro(custo / quantidadePessoas, moeda.value)}</strong></p><small>Estimativa baseada nos dados informados.</small>`;
+  const custoCombustivel = precoInformado * (unidadePreco.value === "galao" ? litros / GALAO_US_LITROS : litros);
+  const custoTotal = custoCombustivel + totalPedagios;
+  resultado.innerHTML = `<p>Distância total<strong>${numero(distanciaKm)} km</strong></p><p>Combustível estimado<strong>${numero(litros)} L</strong></p><p>Custo do combustível<strong>${dinheiro(custoCombustivel, moeda.value)}</strong></p><p>Pedágios<strong>${dinheiro(totalPedagios, moeda.value)}</strong></p><p>Custo total da viagem<strong>${dinheiro(custoTotal, moeda.value)}</strong></p><small>Estimativa baseada nos dados informados.</small>`;
 });
 document.querySelectorAll(".ano").forEach((x) => (x.textContent = new Date().getFullYear()));
