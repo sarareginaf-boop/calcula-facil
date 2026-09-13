@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4V2K05WWJY"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-4V2K05WWJY');</script>
+    <link rel="icon" type="image/png" href="icone-porcentagem.png">
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Calcule o volume de concreto para lajes, vigas, calçadas, pilares e peças cilíndricas." />
+    <title>Calculadora de Concreto | Calcula Fácil</title><link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topo"><a class="marca" href="index.html">Calcula <span>Fácil</span></a><p>Ferramentas simples para decisões do dia a dia</p><a class="nav" href="index.html">Todas as ferramentas</a></header>
+    <main><section class="hero hero-ferramenta"><div><p class="etiqueta">FERRAMENTA GRATUITA</p><h1>Calculadora de concreto</h1><p>Calcule o volume para elementos retangulares ou cilíndricos.</p></div><img src="icone-concreto.png" alt="Betoneira despejando concreto" /></section>
+      <section class="grade"><form id="concreto" class="cartao"><h2>Dimensões do elemento</h2>
+        <label>Formato<select id="formato"><option value="retangular">Retangular: laje, viga ou calçada</option><option value="cilindrico">Cilíndrico: pilar ou estaca</option></select></label>
+        <div id="retangular" class="duas-colunas"><label>Comprimento (m)<input id="comprimento" type="number" min="0" step="any" placeholder="Ex.: 5" /></label><label>Largura (m)<input id="largura" type="number" min="0" step="any" placeholder="Ex.: 3" /></label><label>Espessura/altura (cm)<input id="espessura" type="number" min="0" step="any" placeholder="Ex.: 10" /></label></div>
+        <div id="cilindrico" class="duas-colunas" hidden><label>Diâmetro (cm)<input id="diametro" type="number" min="0" step="any" placeholder="Ex.: 30" /></label><label>Altura (m)<input id="altura" type="number" min="0" step="any" placeholder="Ex.: 3" /></label></div>
+        <div class="duas-colunas"><label>Quantidade de elementos<input id="quantidade" type="number" min="1" step="1" value="1" required /></label><label>Margem adicional (%)<input id="margem" type="number" min="0" step="any" value="5" required /></label></div>
+        <button>Calcular concreto</button></form>
+        <section class="cartao resultado" aria-live="polite"><h2>Volume estimado</h2><div id="resultado">Escolha o formato e informe as dimensões.</div></section></section>
+      <section class="explicacao"><h2>Planejamento do volume</h2><p>A ferramenta calcula o volume geométrico e acrescenta a margem informada. O resultado não substitui projeto, conferência das formas, dosagem, perdas reais ou orientação de profissional habilitado.</p></section>
+    </main><footer>© <span class="ano"></span> Calcula Fácil</footer><script src="concreto.js"></script>
+  </body>
+</html>

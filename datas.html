@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4V2K05WWJY"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-4V2K05WWJY');</script>
+    <link rel="icon" type="image/png" href="icone-porcentagem.png">
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Calcule a diferença entre duas datas em dias, semanas, períodos e dias úteis." />
+    <title>Diferença entre Datas | Calcula Fácil</title><link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topo"><a class="marca" href="index.html">Calcula <span>Fácil</span></a><p>Ferramentas simples para decisões do dia a dia</p><a class="nav" href="index.html">Todas as ferramentas</a></header>
+    <main><section class="hero hero-ferramenta"><div><p class="etiqueta">FERRAMENTA GRATUITA</p><h1>Diferença entre datas</h1><p>Conte dias, semanas, períodos de calendário e dias úteis.</p></div><img src="icone-datas.png" alt="Dois calendários ligados por uma seta" /></section>
+      <section class="grade"><form id="datas" class="cartao"><h2>Escolha o período</h2>
+        <div class="duas-colunas"><label>Data inicial<input id="inicio" type="date" required /></label><label>Data final<input id="fim" type="date" required /></label></div>
+        <label>Incluir a data final?<select id="incluir"><option value="nao">Não</option><option value="sim">Sim</option></select></label>
+        <button>Calcular diferença</button></form>
+        <section class="cartao resultado" aria-live="polite"><h2>Resultado</h2><div id="resultado">Informe as duas datas.</div></section></section>
+      <section class="explicacao"><h2>Sobre os dias úteis</h2><p>A contagem de dias úteis exclui sábados e domingos. Feriados não são descontados, pois variam conforme país, estado e cidade.</p></section>
+    </main><footer>© <span class="ano"></span> Calcula Fácil</footer><script src="datas.js"></script>
+  </body>
+</html>

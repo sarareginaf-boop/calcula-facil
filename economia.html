@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4V2K05WWJY"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-4V2K05WWJY');</script>
+    <link rel="icon" type="image/png" href="icone-porcentagem.png">
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Calcule quanto guardar por mês para alcançar uma meta financeira." />
+    <title>Meta de Economia | Calcula Fácil</title><link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topo"><a class="marca" href="index.html">Calcula <span>Fácil</span></a><p>Ferramentas simples para decisões do dia a dia</p><a class="nav" href="index.html">Todas as ferramentas</a></header>
+    <main><section class="hero hero-ferramenta"><div><p class="etiqueta">FERRAMENTA GRATUITA</p><h1>Meta de economia</h1><p>Descubra quanto guardar por mês para chegar ao valor desejado.</p></div><img src="icone-economia.png" alt="Cofrinho com moedas e seta de crescimento" /></section>
+      <section class="grade"><form id="economia" class="cartao"><h2>Defina sua meta</h2>
+        <label>Moeda<select id="moeda"><option value="BRL">Real (R$)</option><option value="USD">Dólar (US$)</option><option value="EUR">Euro (€)</option></select></label>
+        <div class="duas-colunas"><label>Valor da meta<input id="meta" type="number" min="0" step="any" placeholder="Ex.: 12000" required /></label><label>Valor que já possui<input id="inicial" type="number" min="0" step="any" value="0" required /></label><label>Prazo (meses)<input id="meses" type="number" min="1" step="1" placeholder="Ex.: 12" required /></label><label>Rendimento anual estimado (%)<input id="taxa" type="number" min="0" step="any" value="0" /></label></div>
+        <button>Calcular valor mensal</button></form>
+        <section class="cartao resultado" aria-live="polite"><h2>Plano estimado</h2><div id="resultado">Informe sua meta e o prazo.</div></section></section>
+      <section class="explicacao"><h2>Como é calculado</h2><p>O valor mensal considera depósitos no fim de cada mês e rendimento constante. É uma simulação educativa; taxas, impostos e oscilações reais podem alterar o resultado.</p></section>
+    </main><footer>© <span class="ano"></span> Calcula Fácil</footer><script src="economia.js"></script>
+  </body>
+</html>
