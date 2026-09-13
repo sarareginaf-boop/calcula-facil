@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4V2K05WWJY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4V2K05WWJY');
+    </script>
+    <link rel="icon" type="image/png" href="icone-porcentagem.png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Converta temperaturas entre Fahrenheit, Celsius e Kelvin gratuitamente."
+    />
+    <title>Conversor de Fahrenheit, Celsius e Kelvin | Calcula Fácil</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topo">
+      <a class="marca" href="index.html">Calcula <span>Fácil</span></a>
+      <p>Ferramentas simples para decisões do dia a dia</p>
+      <a class="nav" href="index.html">Todas as ferramentas</a>
+    </header>
+    <main>
+      <section class="hero hero-ferramenta">
+        <div>
+          <p class="etiqueta">FERRAMENTA GRATUITA</p>
+          <h1>Conversor de temperatura</h1>
+          <p>
+            Converta valores entre Fahrenheit, Celsius e Kelvin em poucos
+            segundos.
+          </p>
+        </div>
+        <img
+          src="icone-temperatura.png"
+          alt="Termômetro acompanhado de sol e floco de neve"
+        />
+      </section>
+      <aside class="anuncio" aria-label="Espaço reservado para anúncio">
+        Espaço para anúncio
+      </aside>
+      <section class="grade">
+        <form id="temperatura" class="cartao">
+          <h2>Informe a temperatura</h2>
+          <label
+            >Valor a converter<input
+              id="valor"
+              type="number"
+              step="any"
+              placeholder="Ex.: 68"
+              required /></label
+          ><div class="duas-colunas">
+            <label
+              >De<select id="origem">
+                <option value="F" selected>Fahrenheit (°F)</option>
+                <option value="C">Celsius (°C)</option>
+                <option value="K">Kelvin (K)</option>
+              </select></label
+            ><label
+              >Para<select id="destino">
+                <option value="C" selected>Celsius (°C)</option>
+                <option value="F">Fahrenheit (°F)</option>
+                <option value="K">Kelvin (K)</option>
+              </select></label
+            >
+          </div>
+          <button type="submit">Converter temperatura</button>
+        </form>
+        <section class="cartao resultado" aria-live="polite">
+          <h2>Resultado</h2>
+          <div id="resultado">Informe um valor e clique em converter.</div>
+        </section>
+      </section>
+      <section class="explicacao">
+        <h2>Conversão de temperatura sem complicação</h2>
+        <p>
+          Celsius é a escala mais utilizada no mundo. Fahrenheit é comum nos
+          Estados Unidos, enquanto Kelvin é usada principalmente em cálculos
+          científicos.
+        </p>
+        <p>
+          Para converter Fahrenheit em Celsius, subtraia 32 e divida o
+          resultado por 1,8. Exemplo: 68 °F correspondem a 20 °C.
+        </p>
+      </section>
+    </main>
+    <footer>© <span class="ano"></span> Calcula Fácil</footer>
+    <script src="temperatura.js"></script>
+  </body>
+</html>
