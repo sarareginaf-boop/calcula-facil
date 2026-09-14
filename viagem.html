@@ -6,21 +6,21 @@
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-4V2K05WWJY');</script>
     <link rel="icon" type="image/png" href="icone-porcentagem.png">
     <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="Calcule combustível, custo da viagem e valor por passageiro em diferentes unidades." />
-    <title>Calculadora de Custo de Viagem | Calcula Fácil</title><link rel="stylesheet" href="style.css" />
+    <meta name="description" content="Calcule quantos litros de combustível serão necessários e o custo estimado do trajeto." />
+    <title>Calculadora de Combustível | Calcula Fácil</title><link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header class="topo"><a class="marca" href="index.html">Calcula <span>Fácil</span></a><p>Ferramentas simples para decisões do dia a dia</p><a class="nav" href="index.html">Todas as ferramentas</a></header>
-    <main><section class="hero hero-ferramenta"><div><p class="etiqueta">FERRAMENTA GRATUITA</p><h1>Custo de viagem</h1><p>Calcule o combustível, os pedágios e o custo total da viagem.</p></div><img src="icone-viagem.png" alt="Carro, bomba de combustível e moedas" /></section>
+    <main><section class="hero hero-ferramenta"><div><p class="etiqueta">FERRAMENTA GRATUITA</p><h1>Calculadora de combustível</h1><p>Calcule quantos litros serão necessários e o custo estimado do combustível.</p></div><img src="icone-viagem.png" alt="Carro, bomba de combustível e moedas" /></section>
       <section class="grade"><form id="viagem" class="cartao"><h2>Dados da viagem</h2>
-        <div class="duas-colunas"><label>Distância<input id="distancia" type="number" min="0" step="any" placeholder="Ex.: 350" required /></label><label>Unidade da distância<select id="unidadeDistancia"><option value="km">Quilômetros (km)</option><option value="mi">Milhas (mi)</option></select></label></div>
+        <div class="duas-colunas"><label>Distância<input id="distancia" type="text" inputmode="decimal" placeholder="Ex.: 350" required /></label><label>Unidade da distância<select id="unidadeDistancia"><option value="km">Quilômetros (km)</option><option value="mi">Milhas (mi)</option></select></label></div>
         <label>Trajeto<select id="trajeto"><option value="1">Somente ida</option><option value="2">Ida e volta</option></select></label>
-        <div class="duas-colunas"><label>Consumo do veículo<input id="consumo" type="number" min="0.01" step="any" placeholder="Ex.: 12" required /></label><label>Forma do consumo<select id="unidadeConsumo"><option value="kml">km por litro (km/L)</option><option value="l100">litros a cada 100 km</option><option value="mpg">milhas por galão EUA (mpg)</option></select></label></div>
-        <div class="duas-colunas"><label>Preço do combustível<input id="preco" type="number" min="0" step="any" placeholder="Ex.: 6,20" required /></label><label>Preço informado por<select id="unidadePreco"><option value="litro">Litro</option><option value="galao">Galão EUA</option></select></label></div>
-        <div class="duas-colunas"><label>Moeda<select id="moeda"><option value="BRL">Real (R$)</option><option value="USD">Dólar (US$)</option><option value="EUR">Euro (€)</option></select></label><label>Total de pedágios da viagem<input id="pedagios" type="number" min="0" step="any" value="0" required /></label></div>
-        <button>Calcular viagem</button></form>
+        <div class="duas-colunas"><label>Consumo do veículo<input id="consumo" type="text" inputmode="decimal" placeholder="Ex.: 12" required /></label><label>Forma do consumo<select id="unidadeConsumo"><option value="kml">km por litro (km/L)</option><option value="l100">litros a cada 100 km</option><option value="mpg">milhas por galão EUA (mpg)</option></select></label></div>
+        <div class="duas-colunas"><label>Preço do combustível<input id="preco" type="text" inputmode="decimal" placeholder="Ex.: 6,20" required /></label><label>Preço informado por<select id="unidadePreco"><option value="litro">Litro</option><option value="galao">Galão EUA</option></select></label></div>
+        <label>Moeda<select id="moeda"><option value="BRL">Real (R$)</option><option value="USD">Dólar (US$)</option><option value="EUR">Euro (€)</option></select></label>
+        <button>Calcular combustível</button></form>
         <section class="cartao resultado" aria-live="polite"><h2>Estimativa</h2><div id="resultado">Preencha os dados da viagem.</div></section></section>
-      <section class="explicacao"><h2>Planeje antes de viajar</h2><p>O cálculo considera a distância total, o consumo informado, o preço do combustível e o total de pedágios informado. Estacionamento, manutenção e variações de trânsito não estão incluídos.</p></section>
+      <section class="explicacao"><h2>Estime o consumo</h2><p>O cálculo considera a distância total, o consumo médio do veículo e o preço informado. Trânsito, relevo, carga, modo de condução e condições do veículo podem alterar o consumo real.</p></section>
     </main><footer>© <span class="ano"></span> Calcula Fácil</footer><script src="viagem.js"></script>
   </body>
 </html>
