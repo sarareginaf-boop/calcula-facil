@@ -6,19 +6,19 @@
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-4V2K05WWJY');</script>
     <link rel="icon" type="image/png" href="icone-porcentagem.png">
     <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="Calcule quantos litros de combustível serão necessários e o custo estimado do trajeto." />
-    <title>Calculadora de Combustível | Calcula Fácil</title><link rel="stylesheet" href="style.css" />
+    <meta name="description" content="Calcule quanto vai gastar de gasolina, etanol ou diesel em uma viagem. Descubra litros necessários e custo do combustível usando distância, consumo em km/L e preço." />
+    <title>Calculadora de Combustível e Gasto de Viagem | Calcula Fácil</title><link rel="stylesheet" href="style.css" />
   
     <link rel="canonical" href="https://calculafacilweb.com.br/viagem.html" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Calcula Fácil" />
-    <meta property="og:title" content="Calculadora de Combustível | Calcula Fácil" />
-    <meta property="og:description" content="Calcule quantos litros de combustível serão necessários e o custo estimado do trajeto." />
+    <meta property="og:title" content="Calculadora de Combustível e Gasto de Viagem | Calcula Fácil" />
+    <meta property="og:description" content="Calcule quantos litros de combustível serão necessários e quanto você vai gastar em um trajeto de ida ou ida e volta." />
     <meta property="og:url" content="https://calculafacilweb.com.br/viagem.html" />
   </head>
   <body>
     <header class="topo"><a class="marca" href="index.html">Calcula <span>Fácil</span></a><p>Ferramentas simples para decisões do dia a dia</p><a class="nav" href="index.html">Todas as ferramentas</a></header>
-    <main><section class="hero hero-ferramenta"><div><p class="etiqueta">FERRAMENTA GRATUITA</p><h1>Calculadora de combustível</h1><p>Calcule quantos litros serão necessários e o custo estimado do combustível.</p></div><img src="icone-viagem.png" alt="Carro, bomba de combustível e moedas" /></section>
+    <main><section class="hero hero-ferramenta"><div><p class="etiqueta">FERRAMENTA GRATUITA</p><h1>Calculadora de combustível</h1><p>Descubra quantos litros serão necessários e quanto você vai gastar de combustível em uma viagem.</p></div><img src="icone-viagem.png" alt="Ilustração de carro, bomba de combustível e moedas" /></section>
       <section class="grade"><form id="viagem" class="cartao"><h2>Dados da viagem</h2>
         <div class="duas-colunas"><label>Distância<input id="distancia" type="text" inputmode="decimal" placeholder="Ex.: 350" required /></label><label>Unidade da distância<select id="unidadeDistancia"><option value="km">Quilômetros (km)</option><option value="mi">Milhas (mi)</option></select></label></div>
         <label>Trajeto<select id="trajeto"><option value="1">Somente ida</option><option value="2">Ida e volta</option></select></label>
@@ -27,7 +27,73 @@
         <label>Moeda<select id="moeda"><option value="BRL">Real (R$)</option><option value="USD">Dólar (US$)</option><option value="EUR">Euro (€)</option></select></label>
         <button>Calcular combustível</button></form>
         <section class="cartao resultado" aria-live="polite"><h2>Estimativa</h2><div id="resultado">Preencha os dados da viagem.</div></section></section>
-      <section class="explicacao"><h2>Estime o consumo</h2><p>O cálculo considera a distância total, o consumo médio do veículo e o preço informado. Trânsito, relevo, carga, modo de condução e condições do veículo podem alterar o consumo real.</p></section>
+
+      <section class="explicacao">
+        <h2>Como calcular o gasto de combustível em uma viagem</h2>
+        <p>
+          Esta calculadora de combustível estima <strong>quantos litros serão necessários</strong> para um trajeto e
+          <strong>quanto você vai gastar</strong> com gasolina, etanol, diesel ou outro combustível. Para fazer o cálculo,
+          basta informar a distância da viagem, o consumo médio do veículo e o preço do combustível.
+        </p>
+
+        <h3>Como usar a calculadora de combustível</h3>
+        <p>
+          Informe a distância do percurso e escolha se o valor corresponde somente à ida ou se deseja calcular ida e volta.
+          Depois, digite o consumo médio do veículo. No Brasil, a forma mais comum é <strong>km por litro (km/L)</strong>.
+          Por fim, informe o preço por litro do combustível e clique em calcular.
+        </p>
+        <p>
+          A ferramenta também aceita distância em milhas, consumo em litros a cada 100 km e consumo em milhas por galão dos
+          Estados Unidos (mpg), fazendo as conversões necessárias automaticamente.
+        </p>
+
+        <h3>Fórmula para calcular litros de combustível</h3>
+        <p>
+          Quando o consumo é informado em km/L, a fórmula é:
+          <strong>litros necessários = distância total ÷ consumo médio do veículo</strong>.
+        </p>
+        <p>
+          Para descobrir o gasto, a calculadora utiliza:
+          <strong>custo do combustível = litros necessários × preço por litro</strong>.
+        </p>
+
+        <h3>Exemplo prático</h3>
+        <p>
+          Imagine uma viagem de <strong>300 km</strong> em um carro que faz <strong>12 km/L</strong>, com combustível a
+          <strong>R$ 6,20 por litro</strong>. O veículo precisará de aproximadamente <strong>25 litros</strong>, com custo
+          estimado de <strong>R$ 155,00</strong>. Para ida e volta pelo mesmo percurso, a distância total será de 600 km,
+          resultando em cerca de 50 litros e R$ 310,00 nas mesmas condições.
+        </p>
+
+        <h3>Dúvidas frequentes</h3>
+        <p>
+          <strong>Como calcular quanto vou gastar de gasolina?</strong><br />
+          Divida a distância pelo consumo do carro em km/L para descobrir os litros necessários. Depois multiplique os litros
+          pelo preço da gasolina. A calculadora faz essas duas etapas automaticamente.
+        </p>
+        <p>
+          <strong>Posso calcular gasto com etanol ou diesel?</strong><br />
+          Sim. A fórmula é a mesma. Informe o consumo médio do veículo com o combustível utilizado e o preço correspondente
+          por litro.
+        </p>
+        <p>
+          <strong>Como saber quantos km meu carro faz por litro?</strong><br />
+          O consumo médio pode ser consultado no computador de bordo ou calculado comparando a quilometragem percorrida com a
+          quantidade abastecida. O valor real pode variar conforme as condições de uso.
+        </p>
+
+        <h3>O que pode alterar o consumo real?</h3>
+        <p>
+          Trânsito, velocidade, relevo, uso do ar-condicionado, peso transportado, pneus, manutenção do veículo e forma de
+          condução podem fazer o consumo real ficar diferente da estimativa. Por isso, o resultado deve ser usado como referência
+          para planejamento da viagem.
+        </p>
+        <p>
+          Vai viajar ou trabalhar com outras unidades? Use também o <a href="comprimento.html">conversor de comprimento</a>
+          para converter quilômetros e milhas ou o <a href="conversor.html">conversor de moedas</a> para comparar valores em
+          real, dólar, euro e outras moedas.
+        </p>
+      </section>
     </main><footer>
       <div>© <span id="ano" class="ano"></span> Calcula Fácil</div>
       <nav class="rodape-links" aria-label="Informações do site">
