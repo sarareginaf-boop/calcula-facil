@@ -12,117 +12,56 @@
     <link rel="icon" type="image/png" href="icone-porcentagem.png">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Converta dólar, euro, libra e outras moedas para real com cotação atualizada."
-    />
-    <title>Conversor de Moedas | Calcula Fácil</title>
+    <meta name="description" content="Converta dólar para real, euro para real, libra e outras moedas usando cotação de referência. Simule também uma taxa adicional do banco." />
+    <title>Conversor de Moedas: Dólar, Euro e Real | Calcula Fácil</title>
     <link rel="stylesheet" href="style.css" />
-  
     <link rel="canonical" href="https://calculafacilweb.com.br/conversor.html" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Calcula Fácil" />
-    <meta property="og:title" content="Conversor de Moedas | Calcula Fácil" />
-    <meta property="og:description" content="Converta dólar, euro, libra e outras moedas para real com cotação atualizada." />
+    <meta property="og:title" content="Conversor de Moedas: Dólar, Euro e Real | Calcula Fácil" />
+    <meta property="og:description" content="Converta valores entre real, dólar, euro, libra e outras moedas com cotação de referência." />
     <meta property="og:url" content="https://calculafacilweb.com.br/conversor.html" />
   </head>
   <body>
     <header class="topo">
       <a class="marca" href="index.html">Calcula <span>Fácil</span></a>
       <p>Ferramentas simples para decisões do dia a dia</p>
-      <a class="nav" href="index.html">Calculadora de tinta</a>
+      <a class="nav" href="index.html">Todas as ferramentas</a>
     </header>
     <main>
       <section class="hero hero-ferramenta">
-        <div>
-          <p class="etiqueta">FERRAMENTA GRATUITA</p>
-          <h1>Conversor de moedas</h1>
-          <p>
-            Converta valores entre real, dólar, euro, libra, peso argentino,
-            dólar canadense e franco suíço.
-          </p>
-        </div>
-        <img
-          src="imagem-financas-v2.png"
-          alt="Ilustração de moedas e calculadora"
-        />
+        <div><p class="etiqueta">FERRAMENTA GRATUITA</p><h1>Conversor de moedas</h1><p>Converta valores entre real, dólar, euro, libra e outras moedas e simule uma taxa adicional.</p></div>
+        <img src="imagem-financas-v2.png" alt="Ilustração de moedas e calculadora" />
       </section>
-      <aside class="anuncio">Espaço para anúncio</aside>
       <section class="grade">
         <form id="conversor" class="cartao">
           <h2>Faça sua conversão</h2>
           <div class="duas-colunas">
-            <label class="inteira"
-              >Valor<input
-                id="valor"
-                type="number"
-                min="0"
-                step="0.01"
-                placeholder="Ex.: 100"
-                required
-            /></label>
-            <label>De<select id="de"></select></label>
-            <label>Para<select id="para"></select></label>
+            <label class="inteira">Valor<input id="valor" type="number" min="0" step="0.01" placeholder="Ex.: 100" required /></label>
+            <label>De<select id="de"></select></label><label>Para<select id="para"></select></label>
           </div>
-          <details class="taxa-opcional">
-            <summary>Quer simular a taxa do seu banco?</summary>
-            <p>
-              Consulte no aplicativo, cartão ou atendimento do seu banco qual é
-              o spread/taxa cobrada em operações de câmbio. Se souber a
-              porcentagem, informe abaixo para ver uma estimativa.
-            </p>
-            <label
-              >Taxa adicional do banco (%)<input
-                id="taxa"
-                type="number"
-                min="0"
-                step="0.01"
-                placeholder="Ex.: 2,5"
-                inputmode="decimal"
-            /></label>
-          </details>
+          <details class="taxa-opcional"><summary>Quer simular a taxa do seu banco?</summary><p>Consulte no aplicativo, cartão ou atendimento do seu banco qual é o spread ou taxa cobrada no câmbio. Se souber a porcentagem, informe abaixo.</p><label>Taxa adicional do banco (%)<input id="taxa" type="number" min="0" step="0.01" placeholder="Ex.: 2,5" inputmode="decimal" /></label></details>
           <button type="submit">Converter agora</button>
         </form>
-        <section class="cartao resultado" aria-live="polite">
-          <h2>Resultado</h2>
-          <div id="aguarde">Informe o valor e clique em converter.</div>
-          <div id="resultado-conversao" hidden>
-            <p>Cotação utilizada<strong id="cotacao">—</strong></p>
-            <p>Valor convertido<strong id="convertido">—</strong></p>
-            <p id="linha-taxa" hidden>
-              Taxa adicional<strong id="valor-taxa">—</strong>
-            </p>
-            <p id="linha-total" hidden>
-              Total com taxa<strong id="total">—</strong>
-            </p>
-            <small id="atualizacao"></small>
-          </div>
-        </section>
+        <section class="cartao resultado" aria-live="polite"><h2>Resultado</h2><div id="aguarde">Informe o valor e clique em converter.</div><div id="resultado-conversao" hidden><p>Cotação utilizada<strong id="cotacao">—</strong></p><p>Valor convertido<strong id="convertido">—</strong></p><p id="linha-taxa" hidden>Taxa adicional<strong id="valor-taxa">—</strong></p><p id="linha-total" hidden>Total com taxa<strong id="total">—</strong></p><small id="atualizacao"></small></div></section>
       </section>
-      <aside class="anuncio">Espaço para anúncio</aside>
       <section class="explicacao">
-        <h2>Sobre a cotação e as taxas</h2>
-        <p>
-          O conversor usa uma cotação de referência fornecida por fonte externa.
-          Bancos, cartões, casas de câmbio e plataformas de remessa podem
-          aplicar spread, impostos e tarifas próprios. A taxa adicional é
-          opcional para você simular esse custo.
-        </p>
-        <p>
-          O resultado é informativo e não substitui a cotação final apresentada
-          pela instituição financeira no momento da operação.
-        </p>
+        <h2>Como converter moedas online</h2>
+        <p>Use o conversor para calcular valores entre real, dólar, euro, libra e outras moedas disponíveis. A ferramenta é útil para viagens, compras internacionais, comparação de preços e planejamento de despesas.</p>
+        <h3>Como usar</h3>
+        <p>Digite o valor, escolha a moeda de origem e a moeda de destino. Se quiser aproximar o custo cobrado pela sua instituição, abra a opção de taxa adicional e informe o percentual.</p>
+        <h3>Como funciona a conversão</h3>
+        <p>O valor é convertido com base na cotação de referência disponível para as moedas selecionadas. Se houver uma taxa adicional, ela é aplicada separadamente para mostrar uma estimativa do total.</p>
+        <h3>Exemplo prático</h3>
+        <p>Se 1 dólar estivesse cotado a R$ 5,00, US$ 100 corresponderiam a R$ 500 antes de taxas. Esse exemplo é apenas ilustrativo: use a cotação exibida pela ferramenta no momento da consulta.</p>
+        <h3>Dúvidas frequentes</h3>
+        <p><strong>A cotação é igual à do meu banco ou cartão?</strong><br />Não necessariamente. Bancos, cartões, casas de câmbio e plataformas podem usar cotações, spreads, impostos e tarifas próprios.</p>
+        <p><strong>O que é spread cambial?</strong><br />É uma diferença ou acréscimo aplicado pela instituição sobre a taxa de câmbio de referência. A ferramenta permite simular um percentual adicional quando você souber esse valor.</p>
+        <h3>Observações importantes</h3>
+        <p>O resultado é informativo e não substitui a cotação final apresentada pela instituição financeira no momento da operação. Para outros cálculos, use também a <a href="porcentagem.html">calculadora de porcentagem</a>, a <a href="viagem.html">calculadora de combustível</a> ou a <a href="juros-compostos.html">calculadora de juros compostos</a>.</p>
       </section>
     </main>
-    <footer>
-      <div>© <span id="ano" class="ano"></span> Calcula Fácil</div>
-      <nav class="rodape-links" aria-label="Informações do site">
-        <a href="sobre.html">Sobre</a>
-        <a href="privacidade.html">Privacidade</a>
-        <a href="termos.html">Termos de uso</a>
-        <a href="contato.html">Contato</a>
-      </nav>
-    </footer>
+    <footer><div>© <span id="ano" class="ano"></span> Calcula Fácil</div><nav class="rodape-links" aria-label="Informações do site"><a href="sobre.html">Sobre</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos de uso</a><a href="contato.html">Contato</a></nav></footer>
     <script src="conversor.js"></script>
   </body>
 </html>
