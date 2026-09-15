@@ -418,3 +418,13 @@ footer a {
     margin-right: 22px;
   }
 }
+
+.hero-institucional{max-width:850px}
+.conteudo-institucional{max-width:850px;margin:0 auto 42px;padding:0 22px}
+.conteudo-institucional section{background:white;border:1px solid var(--linha);border-radius:14px;padding:25px;margin-bottom:16px;box-shadow:0 1px 2px #102a4308}
+.conteudo-institucional p{margin-bottom:0}
+.conteudo-institucional a,.email-contato{color:var(--verde);font-weight:700}
+.atualizacao{color:#627d98;font-size:.9rem}
+footer{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+.rodape-links{display:flex;gap:14px;flex-wrap:wrap}
+@media(max-width:680px){footer{display:block}.rodape-links{margin-top:10px}}
