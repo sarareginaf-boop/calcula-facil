@@ -42,9 +42,17 @@ document.getElementById("p2").onsubmit = (e) => {
 };
 document.getElementById("p3").onsubmit = (e) => {
   e.preventDefault();
-  let x = +inicial.value,
-    y = +final.value,
-    z = ((y - x) / x) * 100;
+  const x = Number(inicial.value);
+  const y = Number(final.value);
+  if (!Number.isFinite(x) || !Number.isFinite(y)) {
+    r.textContent = "Informe os dois valores para calcular a variação percentual.";
+    return;
+  }
+  if (x === 0) {
+    r.textContent = "O valor inicial deve ser diferente de zero para calcular a variação percentual.";
+    return;
+  }
+  const z = ((y - x) / x) * 100;
   r.innerHTML = destaque(
     "Variação percentual",
     `${z.toFixed(2).replace(".", ",")}%`,
