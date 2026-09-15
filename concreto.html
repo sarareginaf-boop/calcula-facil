@@ -6,19 +6,19 @@
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-4V2K05WWJY');</script>
     <link rel="icon" type="image/png" href="icone-porcentagem.png">
     <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="Calcule o volume de concreto para lajes, vigas, calçadas, pilares e peças cilíndricas." />
-    <title>Calculadora de Concreto | Calcula Fácil</title><link rel="stylesheet" href="style.css" />
+    <meta name="description" content="Calcule quantos m³ de concreto precisa para laje, calçada, pilar ou estaca. Informe as dimensões, quantidade e margem adicional de forma rápida e gratuita." />
+    <title>Calculadora de Concreto em m³ Online Grátis | Calcula Fácil</title><link rel="stylesheet" href="style.css" />
   
     <link rel="canonical" href="https://calculafacilweb.com.br/concreto.html" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Calcula Fácil" />
-    <meta property="og:title" content="Calculadora de Concreto | Calcula Fácil" />
-    <meta property="og:description" content="Calcule o volume de concreto para lajes, vigas, calçadas, pilares e peças cilíndricas." />
+    <meta property="og:title" content="Calculadora de Concreto em m³ Online Grátis | Calcula Fácil" />
+    <meta property="og:description" content="Calcule o volume de concreto em m³ para lajes, calçadas, pilares e estacas, com margem adicional para planejamento." />
     <meta property="og:url" content="https://calculafacilweb.com.br/concreto.html" />
   </head>
   <body>
     <header class="topo"><a class="marca" href="index.html">Calcula <span>Fácil</span></a><p>Ferramentas simples para decisões do dia a dia</p><a class="nav" href="index.html">Todas as ferramentas</a></header>
-    <main><section class="hero hero-ferramenta"><div><p class="etiqueta">FERRAMENTA GRATUITA</p><h1>Calculadora de concreto</h1><p>Calcule o volume para elementos retangulares ou cilíndricos.</p></div><img src="icone-concreto.png" alt="Betoneira despejando concreto" /></section>
+    <main><section class="hero hero-ferramenta"><div><p class="etiqueta">FERRAMENTA GRATUITA</p><h1>Calculadora de concreto</h1><p>Calcule quantos metros cúbicos de concreto precisa para lajes, calçadas, pilares e estacas.</p></div><img src="icone-concreto.png" alt="Ilustração de betoneira despejando concreto" /></section>
       <section class="grade"><form id="concreto" class="cartao"><h2>Dimensões do elemento</h2>
         <label>Formato<select id="formato"><option value="retangular">Retangular: laje ou calçada</option><option value="cilindrico">Cilíndrico: pilar ou estaca</option></select></label>
         <div id="retangular" class="duas-colunas"><label>Comprimento (m)<input id="comprimento" type="number" min="0" step="any" placeholder="Ex.: 5" /></label><label>Largura (m)<input id="largura" type="number" min="0" step="any" placeholder="Ex.: 3" /></label><label>Espessura/altura (cm)<input id="espessura" type="number" min="0" step="any" placeholder="Ex.: 10" /></label></div>
@@ -26,7 +26,67 @@
         <div class="duas-colunas"><label>Quantidade de elementos<input id="quantidade" type="number" min="1" step="1" value="1" required /></label><label>Margem adicional (%)<input id="margem" type="number" min="0" step="any" value="5" required /></label></div>
         <button>Calcular concreto</button></form>
         <section class="cartao resultado" aria-live="polite"><h2>Volume estimado</h2><div id="resultado">Escolha o formato e informe as dimensões.</div></section></section>
-      <section class="explicacao"><h2>Planejamento do volume</h2><p>A ferramenta calcula o volume geométrico e acrescenta a margem informada. O resultado não substitui projeto, conferência das formas, dosagem, perdas reais ou orientação de profissional habilitado.</p></section>
+
+      <section class="explicacao">
+        <h2>Como calcular o volume de concreto em m³</h2>
+        <p>
+          Esta calculadora de concreto estima o volume necessário em <strong>metros cúbicos (m³)</strong> para elementos
+          retangulares, como lajes e calçadas, e elementos cilíndricos, como pilares e estacas. A ferramenta também permite
+          informar a quantidade de elementos e acrescentar uma margem adicional para planejamento da compra.
+        </p>
+
+        <h3>Como usar a calculadora de concreto</h3>
+        <p>
+          Primeiro escolha o formato. Para <strong>laje ou calçada</strong>, informe comprimento e largura em metros e a
+          espessura em centímetros. Para <strong>pilar ou estaca cilíndrica</strong>, informe o diâmetro em centímetros e a
+          altura em metros. Depois indique quantos elementos iguais serão executados e a margem adicional desejada.
+        </p>
+
+        <h3>Fórmula para laje ou calçada</h3>
+        <p>
+          Para um elemento retangular, o volume é calculado por <strong>comprimento × largura × espessura</strong>.
+          Como a espessura é informada em centímetros, a calculadora a converte para metros antes de calcular o volume.
+        </p>
+        <p>
+          Por exemplo, uma laje de <strong>5 m × 3 m</strong> com <strong>10 cm</strong> de espessura possui volume geométrico
+          de <strong>1,50 m³</strong>. Com margem adicional de 5%, o total estimado passa para <strong>1,575 m³</strong>.
+        </p>
+
+        <h3>Fórmula para pilar ou estaca cilíndrica</h3>
+        <p>
+          Para elementos cilíndricos, a fórmula utilizada é <strong>π × raio² × altura</strong>. O raio corresponde à metade
+          do diâmetro. A calculadora converte automaticamente o diâmetro informado em centímetros para metros.
+        </p>
+
+        <h3>Dúvidas frequentes</h3>
+        <p>
+          <strong>Como saber quantos m³ de concreto preciso?</strong><br />
+          Meça as dimensões do elemento, escolha o formato correto e informe os valores na calculadora. O resultado mostra o
+          volume geométrico, a margem acrescentada e o total estimado em metros cúbicos.
+        </p>
+        <p>
+          <strong>Por que a espessura da laje ou calçada é informada em centímetros?</strong><br />
+          Porque essa medida costuma ser utilizada no dia a dia da obra. A ferramenta faz a conversão para metros internamente
+          antes de calcular o volume em m³.
+        </p>
+        <p>
+          <strong>Quanto de margem devo acrescentar ao concreto?</strong><br />
+          A margem depende das condições reais da execução, geometria, formas, perdas e forma de fornecimento. O campo existe
+          para planejamento e pode ser ajustado conforme a necessidade do serviço.
+        </p>
+
+        <h3>Observações importantes</h3>
+        <p>
+          O resultado representa uma <strong>estimativa geométrica de volume</strong>. Ele não substitui projeto estrutural,
+          conferência das formas, especificação do concreto, definição de resistência, dosagem, controle tecnológico ou
+          orientação de profissional habilitado. Antes de pedir concreto usinado ou preparar o material na obra, confira as
+          dimensões reais e as especificações do projeto.
+        </p>
+        <p>
+          Para outras etapas da obra, use também a <a href="piso-rejunte.html">calculadora de piso e rejunte</a>, a
+          <a href="tinta.html">calculadora de tinta</a> e o <a href="comprimento.html">conversor de comprimento</a>.
+        </p>
+      </section>
     </main><footer>
       <div>© <span id="ano" class="ano"></span> Calcula Fácil</div>
       <nav class="rodape-links" aria-label="Informações do site">
