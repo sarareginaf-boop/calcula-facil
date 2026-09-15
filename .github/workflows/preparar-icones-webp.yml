@@ -31,7 +31,9 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          from PIL import Image
+          from PIL import Image, ImageFile
+
+          ImageFile.LOAD_TRUNCATED_IMAGES = True
 
           arquivos = [
               'icone-viagem.png',
@@ -51,9 +53,13 @@ jobs:
                   continue
 
               destino = origem.with_suffix('.webp')
-              with Image.open(origem) as imagem:
-                  imagem.save(destino, 'WEBP', quality=82, method=6)
-              print(f'{origem} -> {destino} ({destino.stat().st_size} bytes)')
+              try:
+                  with Image.open(origem) as imagem:
+                      imagem.load()
+                      imagem.save(destino, 'WEBP', quality=82, method=6)
+                  print(f'{origem} -> {destino} ({destino.stat().st_size} bytes)')
+              except Exception as erro:
+                  print(f'Falha em {nome}: {erro}')
           PY
 
       - name: Salvar WebPs no repositorio
@@ -61,7 +67,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add icone-viagem.webp icone-volume.webp icone-temperatura.webp icone-datas.webp icone-peso.webp icone-comprimento.webp icone-area.webp icone-economia.webp
+          git add icone-*.webp
           if git diff --cached --quiet; then
             echo "Nenhuma alteracao para salvar."
             exit 0
