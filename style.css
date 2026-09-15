@@ -445,17 +445,8 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:18px;fl
 .campo-busca {
   position: relative;
 }
-.campo-busca span {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #627d98;
-  font-size: 1.35rem;
-  pointer-events: none;
-}
 .campo-busca input {
-  padding: 13px 42px;
+  padding: 13px 14px;
   border-radius: 10px;
   background: #fbfcfd;
 }
