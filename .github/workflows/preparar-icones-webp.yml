@@ -1,0 +1,70 @@
+name: Preparar icones WebP
+
+on:
+  push:
+    paths:
+      - '.github/workflows/preparar-icones-webp.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  converter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Instalar Pillow
+        run: python -m pip install --quiet Pillow
+
+      - name: Converter PNGs restantes para WebP
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+
+          arquivos = [
+              'icone-viagem.png',
+              'icone-volume.png',
+              'icone-temperatura.png',
+              'icone-datas.png',
+              'icone-peso.png',
+              'icone-comprimento.png',
+              'icone-area.png',
+              'icone-economia.png',
+          ]
+
+          for nome in arquivos:
+              origem = Path(nome)
+              if not origem.exists():
+                  print(f'Ignorado: {nome} nao existe')
+                  continue
+
+              destino = origem.with_suffix('.webp')
+              with Image.open(origem) as imagem:
+                  imagem.save(destino, 'WEBP', quality=82, method=6)
+              print(f'{origem} -> {destino} ({destino.stat().st_size} bytes)')
+          PY
+
+      - name: Salvar WebPs no repositorio
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add icone-viagem.webp icone-volume.webp icone-temperatura.webp icone-datas.webp icone-peso.webp icone-comprimento.webp icone-area.webp icone-economia.webp
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteracao para salvar."
+            exit 0
+          fi
+          git commit -m "Prepara icones restantes em WebP"
+          git push
