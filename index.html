@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Ferramentas gratuitas para cálculos de casa, dinheiro e dia a dia."
+      content="Calculadoras online gratuitas para porcentagem, tinta, concreto, combustível, finanças, conversões e tarefas do dia a dia."
     />
     <title>Ferramentas Gratuitas | Calcula Fácil</title>
     <link rel="icon" type="image/png" href="icone-porcentagem.png">
@@ -51,19 +51,37 @@
       </section>
       <section class="ferramentas">
         <h2>Encontre a ferramenta que precisa</h2>
-        <div class="cards-links">
+        <p class="introducao-ferramentas">
+          Pesquise pelo nome ou pelo que deseja calcular. Todas as ferramentas são
+          gratuitas, funcionam no celular e não exigem cadastro.
+        </p>
+        <div class="busca-ferramentas" role="search">
+          <label for="busca">Pesquisar calculadora</label>
+          <div class="campo-busca">
+            <span aria-hidden="true">⌕</span>
+            <input
+              id="busca"
+              type="search"
+              placeholder="Ex.: porcentagem, tinta, metros ou combustível"
+              autocomplete="off"
+              aria-controls="lista-ferramentas"
+            />
+          </div>
+          <p id="status-busca" class="status-busca" aria-live="polite"></p>
+        </div>
+        <div class="cards-links" id="lista-ferramentas">
           <a href="tinta.html"
             ><span class="titulo-card"
               ><img class="icone" src="icone-tinta.png" alt="" />Calculadora de
               tinta</span
             >
-            <small>Estime litros e latas para pintar paredes</small></a
+            <small>Calcule litros e latas para pintar paredes, descontando portas e janelas.</small></a
           ><a href="conversor.html"
             ><span class="titulo-card"
               ><img class="icone" src="icone-moedas.png" alt="" />Conversor de
               moedas</span
             >
-            <small>Cotação automática entre moedas</small></a
+            <small>Converta valores entre real, dólar, euro e outras moedas usando a cotação disponível.</small></a
           ><a href="temperatura.html"
             ><span class="titulo-card"
               ><img
@@ -72,7 +90,7 @@
                 alt=""
               />Conversor de temperatura</span
             >
-            <small>Converta Celsius, Fahrenheit e Kelvin</small></a
+            <small>Converta temperaturas entre Celsius, Fahrenheit e Kelvin em poucos segundos.</small></a
           ><a href="porcentagem.html"
             ><span class="titulo-card"
               ><img
@@ -81,97 +99,100 @@
                 alt=""
               />Calculadora de porcentagem</span
             >
-            <small>Desconto, aumento e comparação</small></a
+            <small>Calcule descontos, aumentos, variações e quanto uma porcentagem representa de um valor.</small></a
           ><a href="juros-compostos.html"
             ><span class="titulo-card"
               ><img class="icone" src="icone-juros.png" alt="" />Juros
               compostos</span
             >
-            <small>Simule aportes e prazo</small></a
+            <small>Simule o crescimento de investimentos com valor inicial, juros, prazo e aportes mensais.</small></a
           ><a href="idade.html"
             ><span class="titulo-card"
               ><img class="icone" src="icone-idade.png" alt="" />Calculadora de
               idade</span
             >
-            <small>Idade, signo e aniversário</small></a
+            <small>Descubra a idade exata, o signo e quantos dias faltam para o próximo aniversário.</small></a
           ><a href="regra-de-tres.html"
             ><span class="titulo-card"
               ><img class="icone" src="icone-regra.png" alt="" />Regra de três
               simples</span
             >
-            <small>Resolva proporções</small></a
+            <small>Resolva proporções do cotidiano, como preço por quantidade, receitas e medidas.</small></a
           ><a href="piso-rejunte.html"
             ><span class="titulo-card"
               ><img class="icone" src="icone-piso.png" alt="" />Piso e
               rejunte</span
             >
-            <small>Estime materiais para sua obra</small></a
+            <small>Estime a quantidade de pisos e rejunte necessária para cômodos e áreas da obra.</small></a
           >
           <a href="rodape.html"
             ><span class="titulo-card"
               ><img class="icone" src="icone-piso.png" alt="" />Calculadora de
               rodapé</span
-            ><small>Calcule rodapés de qualquer modelo</small></a
+            ><small>Calcule quantos metros e peças de rodapé comprar para cada ambiente.</small></a
           >
           <a href="imc.html"
             ><span class="titulo-card"
               ><img class="icone" src="icone-idade.png" alt="" />Calculadora de
               IMC</span
-            ><small>Veja uma referência do seu índice</small></a
+            ><small>Calcule o índice de massa corporal com base no peso e na altura.</small></a
           >
           <a href="financiamento.html"
             ><span class="titulo-card"
               ><img class="icone" src="icone-juros.png" alt="" />Financiamento e
               empréstimos</span
-            ><small>Simule Price e SAC</small></a
+            ><small>Compare parcelas e custos de financiamentos pelos sistemas Price e SAC.</small></a
           >
           <a href="cientifica.html"
             ><span class="titulo-card"
               ><img class="icone" src="icone-regra.png" alt="" />Calculadora
               científica</span
-            ><small>Funções e operações matemáticas</small></a
+            ><small>Resolva operações matemáticas, potências, raízes e funções científicas.</small></a
           >
           <a href="comprimento.html"
             ><span class="titulo-card"><img class="icone" src="icone-comprimento.png" alt="" />Conversor de comprimento</span
-            ><small>Metros, pés, polegadas e milhas</small></a
+            ><small>Converta metros, centímetros, quilômetros, pés, polegadas e milhas.</small></a
           >
           <a href="peso.html"
             ><span class="titulo-card"><img class="icone" src="icone-peso.png" alt="" />Conversor de peso</span
-            ><small>Quilos, libras, onças e mais</small></a
+            ><small>Converta quilos, gramas, libras, onças e outras unidades de massa.</small></a
           >
           <a href="area.html"
             ><span class="titulo-card"><img class="icone" src="icone-area.png" alt="" />Conversor de área</span
-            ><small>m², hectares, pés² e acres</small></a
+            ><small>Converta áreas em metros quadrados, hectares, pés quadrados, acres e outras unidades.</small></a
           >
           <a href="volume.html"
             ><span class="titulo-card"><img class="icone" src="icone-volume.png" alt="" />Conversor de volume</span
-            ><small>Litros, xícaras e galões</small></a
+            ><small>Converta litros, mililitros, xícaras, galões e outras medidas de volume.</small></a
           >
           <a href="viagem.html"
             ><span class="titulo-card"><img class="icone" src="icone-viagem.png" alt="" />Calculadora de combustível</span
-            ><small>Litros necessários e custo estimado</small></a
+            ><small>Estime os litros e o custo de combustível para trajetos de ida ou ida e volta.</small></a
           >
           <a href="culinaria.html"
             ><span class="titulo-card"><img class="icone" src="icone-culinaria.png" alt="" />Conversor culinário</span
-            ><small>Xícaras em gramas por ingrediente</small></a
+            ><small>Converta xícaras, colheres e gramas conforme o ingrediente da receita.</small></a
           >
           <a href="concreto.html"
             ><span class="titulo-card"><img class="icone" src="icone-concreto.png" alt="" />Calculadora de concreto</span
-            ><small>Volume com margem adicional</small></a
+            ><small>Calcule o volume de concreto para lajes, calçadas, pilares e estacas.</small></a
           >
           <a href="economia.html"
             ><span class="titulo-card"><img class="icone" src="icone-economia.png" alt="" />Meta de economia</span
-            ><small>Quanto guardar por mês</small></a
+            ><small>Descubra quanto guardar por mês para alcançar uma meta financeira no prazo desejado.</small></a
           >
           <a href="fuso.html"
             ><span class="titulo-card"><img class="icone" src="icone-fuso.png" alt="" />Conversor de fuso horário</span
-            ><small>Horários entre cidades</small></a
+            ><small>Compare horários entre cidades e fusos para viagens, reuniões e ligações.</small></a
           >
           <a href="datas.html"
             ><span class="titulo-card"><img class="icone" src="icone-datas.png" alt="" />Diferença entre datas</span
-            ><small>Dias, semanas e dias úteis</small></a
+            ><small>Calcule o intervalo entre duas datas em dias, semanas, meses e dias úteis.</small></a
           >
         </div>
+        <p id="sem-resultados" class="sem-resultados" hidden>
+          Nenhuma ferramenta encontrada. Tente pesquisar com outra palavra.
+        </p>
       </section>
       <section class="explicacao">
         <h2>Feito para ser simples</h2>
@@ -191,7 +212,32 @@
       </nav>
     </footer>
    
-    <script>document.getElementById("ano").textContent = new Date().getFullYear();</script>
+    <script>
+      document.getElementById("ano").textContent = new Date().getFullYear();
+
+      const busca = document.getElementById("busca");
+      const ferramentas = [...document.querySelectorAll("#lista-ferramentas > a")];
+      const statusBusca = document.getElementById("status-busca");
+      const semResultados = document.getElementById("sem-resultados");
+      const normalizar = (texto) =>
+        texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+      busca.addEventListener("input", () => {
+        const termo = normalizar(busca.value.trim());
+        let total = 0;
+
+        ferramentas.forEach((ferramenta) => {
+          const encontrada = !termo || normalizar(ferramenta.textContent).includes(termo);
+          ferramenta.hidden = !encontrada;
+          if (encontrada) total++;
+        });
+
+        semResultados.hidden = total !== 0;
+        statusBusca.textContent = termo
+          ? total + (total === 1 ? " ferramenta encontrada" : " ferramentas encontradas")
+          : "";
+      });
+    </script>
   </body>
   
 </html>

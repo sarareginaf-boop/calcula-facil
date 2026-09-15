@@ -428,3 +428,59 @@ footer a {
 footer{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
 .rodape-links{display:flex;gap:14px;flex-wrap:wrap}
 @media(max-width:680px){footer{display:block}.rodape-links{margin-top:10px}}
+
+.introducao-ferramentas {
+  max-width: 720px;
+  margin: -6px 0 20px;
+  color: #627d98;
+}
+.busca-ferramentas {
+  max-width: 680px;
+  margin-bottom: 24px;
+}
+.busca-ferramentas label {
+  margin-top: 0;
+  color: var(--azul);
+}
+.campo-busca {
+  position: relative;
+}
+.campo-busca span {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #627d98;
+  font-size: 1.35rem;
+  pointer-events: none;
+}
+.campo-busca input {
+  padding: 13px 42px;
+  border-radius: 10px;
+  background: #fbfcfd;
+}
+.campo-busca input:focus {
+  outline: 3px solid #10a37f26;
+  border-color: var(--verde);
+}
+.status-busca {
+  min-height: 1.3em;
+  margin: 7px 0 0;
+  color: #627d98;
+  font-size: 0.86rem;
+}
+.cards-links a {
+  display: flex;
+  flex-direction: column;
+}
+.cards-links small {
+  line-height: 1.4;
+}
+.sem-resultados {
+  margin: 18px 0 0;
+  padding: 18px;
+  border-radius: 9px;
+  background: #f6f8fa;
+  color: #627d98;
+  text-align: center;
+}
