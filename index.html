@@ -218,21 +218,95 @@
       const ferramentas = [...document.querySelectorAll("#lista-ferramentas > a")];
       const statusBusca = document.getElementById("status-busca");
       const semResultados = document.getElementById("sem-resultados");
+
       const normalizar = (texto) =>
-        texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        texto
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .replace(/[^a-z0-9%]+/g, " ")
+          .trim();
+
+      const palavrasIgnoradas = new Set([
+        "a", "ao", "aos", "as", "de", "da", "das", "do", "dos", "e", "em",
+        "eu", "o", "os", "para", "por", "pra", "pro", "que", "qual", "uma",
+        "um", "vou", "quero", "preciso", "como", "qto", "quanto"
+      ]);
+
+      const termosRelacionados = {
+        "tinta.html": "pintura pintar parede paredes tinta tintas litro litros lata latas rendimento demão demao portas janelas quarto sala casa ambiente",
+        "conversor.html": "moeda moedas cambio câmbio cotacao cotação real reais brl dolar dólar usd euro eur libra dinheiro converter conversao conversão",
+        "temperatura.html": "temperatura celsius fahrenheit kelvin graus calor frio clima converter conversao conversão",
+        "porcentagem.html": "porcentagem percentual percentagem desconto aumento acrescimo acréscimo variacao variação porcento % valor promocao promoção",
+        "juros-compostos.html": "juros composto compostos investimento investir rendimento aplicacao aplicação capital aporte aportes mensal meses taxa rentabilidade montante",
+        "idade.html": "idade anos meses dias nascimento nasci aniversario aniversário signo data nascimento",
+        "regra-de-tres.html": "regra tres três proporcao proporção proporcional quantidade preco preço receita medida calcular x",
+        "piso-rejunte.html": "piso pisos revestimento ceramica cerâmica porcelanato rejunte obra comodo cômodo area área quantidade caixa caixas comprar",
+        "rodape.html": "rodape rodapé metros linear lineares peça pecas peças ambiente parede perimetro perímetro comprar",
+        "imc.html": "imc indice índice massa corporal peso altura kg saude saúde adulto corporal",
+        "financiamento.html": "financiamento emprestimo empréstimo parcela parcelas price sac juros credito crédito banco casa carro saldo devedor amortizacao amortização",
+        "cientifica.html": "cientifica científica matematica matemática potencia potência raiz logaritmo seno cosseno tangente operacao operação calculo cálculo",
+        "comprimento.html": "comprimento distancia distância metro metros centimetro centímetro centimetros centímetros milimetro milímetro quilometro quilômetro km pe pé pes pés polegada polegadas milha milhas medida tamanho",
+        "peso.html": "peso massa quilo quilos kg grama gramas libra libras onca onça oncas onças pesar pesa converter conversao conversão",
+        "area.html": "area área metro quadrado metros quadrados m2 hectare hectares acre acres pe quadrado pés quadrados terreno superficie superfície tamanho",
+        "volume.html": "volume litro litros ml mililitro mililitros xicara xícara xicaras xícaras galao galão galoes galões liquido líquido capacidade",
+        "viagem.html": "combustivel combustível gasolina etanol alcool álcool diesel carro veiculo veículo viagem trajeto km litro litros consumo autonomia abastecer abastecimento gasto gastar custo preco preço posto ida volta",
+        "culinaria.html": "culinaria culinária cozinha receita receitas ingrediente ingredientes farinha acucar açúcar leite manteiga arroz xicara xícara xicaras xícaras colher colheres grama gramas ml mililitros peso pesar pesa medida medidas converter",
+        "concreto.html": "concreto cimento laje lajes calcada calçada calcadas calçadas pilar pilares estaca estacas volume metro cubico cúbico m3 obra construir construção",
+        "economia.html": "economia economizar guardar dinheiro poupar meta objetivo mensal mes mês meses reserva juntar valor prazo",
+        "fuso.html": "fuso horario horário hora horas cidade cidades pais país viagem reuniao reunião ligacao ligação diferenca diferença tempo",
+        "datas.html": "data datas diferenca diferença intervalo dias semanas meses uteis úteis prazo entre calendario calendário"
+      };
+
+      const expandirTermo = (termo) => {
+        const equivalencias = {
+          "gas": "gasolina",
+          "alcool": "etanol",
+          "combustivel": "gasolina",
+          "xic": "xicara",
+          "mts": "metros",
+          "mt": "metro",
+          "kgs": "kg",
+          "porcento": "porcentagem"
+        };
+        return equivalencias[termo] || termo;
+      };
+
+      const obterTermosBusca = (texto) => {
+        const termos = normalizar(texto)
+          .split(/\s+/)
+          .filter(Boolean)
+          .map(expandirTermo)
+          .filter((termo) => !palavrasIgnoradas.has(termo) && termo.length > 1);
+        return [...new Set(termos)];
+      };
+
+      const corresponde = (ferramenta, termos) => {
+        if (!termos.length) return true;
+
+        const href = ferramenta.getAttribute("href");
+        const texto = normalizar(
+          ferramenta.textContent + " " + (termosRelacionados[href] || "")
+        );
+
+        const acertos = termos.filter((termo) => texto.includes(termo)).length;
+        const minimoDeAcertos = termos.length === 1 ? 1 : Math.ceil(termos.length * 0.5);
+        return acertos >= minimoDeAcertos;
+      };
 
       busca.addEventListener("input", () => {
-        const termo = normalizar(busca.value.trim());
+        const valor = busca.value.trim();
+        const termos = obterTermosBusca(valor);
         let total = 0;
 
         ferramentas.forEach((ferramenta) => {
-          const encontrada = !termo || normalizar(ferramenta.textContent).includes(termo);
+          const encontrada = !valor || corresponde(ferramenta, termos);
           ferramenta.hidden = !encontrada;
           if (encontrada) total++;
         });
 
         semResultados.hidden = total !== 0;
-        statusBusca.textContent = termo
+        statusBusca.textContent = valor
           ? total + (total === 1 ? " ferramenta encontrada" : " ferramentas encontradas")
           : "";
       });
