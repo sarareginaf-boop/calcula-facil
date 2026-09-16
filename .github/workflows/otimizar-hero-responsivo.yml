@@ -1,0 +1,91 @@
+name: Otimizar hero responsivo
+
+on:
+  push:
+    paths:
+      - '.github/workflows/otimizar-hero-responsivo.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  otimizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Instalar Pillow
+        run: python -m pip install --quiet Pillow
+
+      - name: Gerar hero responsivo em WebP
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import re
+
+          src = Path('hero-ferramentas.jpg')
+          if not src.exists():
+              raise SystemExit('hero-ferramentas.jpg nao encontrado')
+
+          with Image.open(src) as im:
+              im.load()
+              original_w, original_h = im.size
+              for largura in (800, 1200):
+                  altura = round(original_h * largura / original_w)
+                  out = im.resize((largura, altura), Image.Resampling.LANCZOS)
+                  nome = Path(f'hero-ferramentas-{largura}.webp')
+                  out.save(nome, 'WEBP', quality=78, method=6)
+                  print(f'{nome}: {nome.stat().st_size} bytes, {largura}x{altura}')
+
+          p = Path('index.html')
+          html = p.read_text(encoding='utf-8')
+
+          preload_antigo = '<link rel="preload" as="image" href="hero-ferramentas.jpg" fetchpriority="high" />'
+          preload_novo = '<link rel="preload" as="image" href="hero-ferramentas-800.webp" imagesrcset="hero-ferramentas-800.webp 800w, hero-ferramentas-1200.webp 1200w" imagesizes="(max-width: 680px) calc(100vw - 44px), 50vw" type="image/webp" fetchpriority="high" />'
+          if preload_antigo not in html:
+              raise SystemExit('Preload antigo do hero nao encontrado')
+          html = html.replace(preload_antigo, preload_novo, 1)
+
+          padrao = re.compile(r'<img\s+class="hero-ilustracao"\s+src="hero-ferramentas\.jpg"\s+alt="Ilustração com calculadora, casa, tinta e moedas"\s+width="1672"\s+height="941"\s+fetchpriority="high"\s+loading="eager"\s+decoding="async"\s*/>', re.S)
+          novo = '''<img
+          class="hero-ilustracao"
+          src="hero-ferramentas-800.webp"
+          srcset="hero-ferramentas-800.webp 800w, hero-ferramentas-1200.webp 1200w"
+          sizes="(max-width: 680px) calc(100vw - 44px), 50vw"
+          alt="Ilustração com calculadora, casa, tinta e moedas"
+          width="800"
+          height="450"
+          fetchpriority="high"
+          loading="eager"
+          decoding="async" />'''
+          html2, n = padrao.subn(novo, html, count=1)
+          if n != 1:
+              raise SystemExit(f'Hero principal nao foi substituido: {n}')
+          p.write_text(html2, encoding='utf-8')
+
+          # Validacoes
+          final = p.read_text(encoding='utf-8')
+          for item in ('hero-ferramentas-800.webp', 'hero-ferramentas-1200.webp', 'srcset=', 'imagesrcset='):
+              if item not in final:
+                  raise SystemExit(f'Validacao falhou: {item}')
+          print('Hero responsivo aplicado com sucesso.')
+          PY
+
+      - name: Salvar ajustes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html hero-ferramentas-800.webp hero-ferramentas-1200.webp
+          git commit -m "Otimiza imagem principal responsiva da home"
+          git push
