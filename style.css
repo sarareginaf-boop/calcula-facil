@@ -1,6 +1,6 @@
 :root {
   --azul: #102a43;
-  --verde: #10a37f;
+  --verde: #087f63;
   --fundo: #f6f8fa;
   --texto: #243b53;
   --linha: #d9e2ec;
@@ -42,7 +42,7 @@ footer {
 }
 .topo p {
   margin: 0;
-  color: #627d98;
+  color: #526d82;
   font-size: 0.9rem;
 }
 .nav {
@@ -214,7 +214,7 @@ input::placeholder {
 
 .aberturas p {
   margin: 7px 0;
-  color: #627d98;
+  color: #526d82;
   font-size: 0.88rem;
 }
 
@@ -263,7 +263,7 @@ input::placeholder {
 
 .exemplo-regra p {
   margin: 8px 0 0;
-  color: #627d98;
+  color: #526d82;
   font-size: 0.9rem;
 }
 .inteira {
@@ -281,7 +281,7 @@ input::placeholder {
 }
 .taxa-opcional p {
   font-size: 0.88rem;
-  color: #627d98;
+  color: #526d82;
   margin: 10px 0 14px;
 }
 button {
@@ -359,7 +359,7 @@ button.aba.ativa {
 small {
   display: block;
   margin-top: 20px;
-  color: #627d98;
+  color: #526d82;
 }
 .explicacao {
   max-width: 850px;
@@ -368,7 +368,7 @@ small {
 }
 footer {
   padding: 30px 22px;
-  color: #627d98;
+  color: #526d82;
   font-size: 0.86rem;
 }
 footer a {
@@ -432,7 +432,7 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:18px;fl
 .introducao-ferramentas {
   max-width: 720px;
   margin: -6px 0 20px;
-  color: #627d98;
+  color: #526d82;
 }
 .busca-ferramentas {
   max-width: 680px;
@@ -457,7 +457,7 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:18px;fl
 .status-busca {
   min-height: 1.3em;
   margin: 7px 0 0;
-  color: #627d98;
+  color: #526d82;
   font-size: 0.86rem;
 }
 .cards-links a {
@@ -472,6 +472,6 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:18px;fl
   padding: 18px;
   border-radius: 9px;
   background: #f6f8fa;
-  color: #627d98;
+  color: #526d82;
   text-align: center;
 }
