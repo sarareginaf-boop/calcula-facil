@@ -24,21 +24,19 @@ jobs:
           from pathlib import Path
           from html.parser import HTMLParser
           import json, re, xml.etree.ElementTree as ET
-          from urllib.parse import urlparse
 
-          raiz = Path('.')
-          htmls = sorted(raiz.glob('*.html'))
+          htmls = sorted(Path('.').glob('*.html'))
           alteradas = []
 
           # 1) Padroniza links internos para a home
           for p in htmls:
               txt = p.read_text(encoding='utf-8')
-              novo = re.sub(r'href=(['\"'])index\.html\1', 'href="/"', txt, flags=re.I)
+              novo = txt.replace('href="index.html"', 'href="/"').replace("href='index.html'", 'href="/"')
               if novo != txt:
                   p.write_text(novo, encoding='utf-8')
                   alteradas.append(p.name)
 
-          # 2) Atualiza lastmod no sitemap apenas para paginas alteradas e home
+          # 2) Atualiza lastmod no sitemap para paginas alteradas
           sm = Path('sitemap.xml')
           smtxt = sm.read_text(encoding='utf-8')
           for nome in alteradas:
@@ -47,27 +45,27 @@ jobs:
               smtxt = re.sub(pat, r'\g<1>2026-09-16\g<2>', smtxt)
           sm.write_text(smtxt, encoding='utf-8')
 
-          # 3) Auditoria de HTML local
+          # 3) Auditoria das paginas publicas
           class Parser(HTMLParser):
               def __init__(self):
                   super().__init__()
-                  self.links=[]; self.canon=[]; self.robots=[]; self.jsonlds=[]
+                  self.canon=[]
+                  self.robots=[]
               def handle_starttag(self, tag, attrs):
                   d=dict(attrs)
-                  if tag=='a' and d.get('href'): self.links.append(d['href'])
-                  if tag=='link' and d.get('rel')=='canonical' and d.get('href'): self.canon.append(d['href'])
-                  if tag=='meta' and d.get('name','').lower()=='robots' and d.get('content'): self.robots.append(d['content'].lower())
-              def handle_data(self, data):
-                  pass
+                  if tag=='link' and d.get('rel')=='canonical' and d.get('href'):
+                      self.canon.append(d['href'])
+                  if tag=='meta' and d.get('name','').lower()=='robots' and d.get('content'):
+                      self.robots.append(d['content'].lower())
 
           erros=[]
-          publicas=[]
           sitemap_root = ET.fromstring(sm.read_text(encoding='utf-8'))
           ns={'s':'http://www.sitemaps.org/schemas/sitemap/0.9'}
           urls=[u.find('s:loc',ns).text for u in sitemap_root.findall('s:url',ns)]
           if len(urls)!=27:
               erros.append(f'Sitemap deveria ter 27 URLs, encontrou {len(urls)}')
 
+          publicas=[]
           for url in urls:
               if url.rstrip('/')=='https://calculafacilweb.com.br':
                   publicas.append('index.html')
@@ -86,25 +84,21 @@ jobs:
               if any('noindex' in r for r in parser.robots):
                   erros.append(f'{nome}: pagina publica com noindex')
 
-              # JSON-LD válido
               scripts=re.findall(r'<script\s+type="application/ld\+json"[^>]*>(.*?)</script>', txt, flags=re.I|re.S)
               for i,s in enumerate(scripts,1):
-                  try: json.loads(s)
-                  except Exception as e: erros.append(f'{nome}: JSON-LD {i} invalido: {e}')
+                  try:
+                      json.loads(s)
+                  except Exception as e:
+                      erros.append(f'{nome}: JSON-LD {i} invalido: {e}')
 
-              # links locais quebrados
-              for href in re.findall(r'<a\b[^>]*href="([^"]+)"', txt, flags=re.I):
-                  if href.startswith(('#','mailto:','tel:','http://','https://','javascript:')):
-                      continue
-                  if href=='/':
+              for href in re.findall(r'<a\b[^>]*href=["\']([^"\']+)["\']', txt, flags=re.I):
+                  if href.startswith(('#','mailto:','tel:','http://','https://','javascript:')) or href=='/':
                       continue
                   destino=href.split('#',1)[0].split('?',1)[0]
-                  if not destino:
-                      continue
-                  if not Path(destino).exists():
+                  if destino and not Path(destino).exists():
                       erros.append(f'{nome}: link local quebrado -> {href}')
 
-          # 4) trabalhista deve continuar fora do sitemap e noindex
+          # 4) pagina em revisao
           trab=Path('trabalhista.html')
           if trab.exists():
               t=trab.read_text(encoding='utf-8').lower()
@@ -113,9 +107,10 @@ jobs:
               if 'trabalhista.html' in sm.read_text(encoding='utf-8'):
                   erros.append('trabalhista.html nao deve estar no sitemap')
 
-          # 5) nenhum href index.html restante
+          # 5) nenhum link interno para index.html
           for p in htmls:
-              if re.search(r'href=(['\"'])index\.html\1', p.read_text(encoding='utf-8'), flags=re.I):
+              txt=p.read_text(encoding='utf-8')
+              if 'href="index.html"' in txt or "href='index.html'" in txt:
                   erros.append(f'{p.name}: ainda contem link para index.html')
 
           # 6) robots aponta para sitemap
@@ -123,11 +118,12 @@ jobs:
           if 'https://calculafacilweb.com.br/sitemap.xml' not in robots:
               erros.append('robots.txt nao aponta para sitemap.xml')
 
-          print('Paginas com link da home padronizado:', ', '.join(alteradas) if alteradas else 'nenhuma')
+          print('Paginas com link da home padronizado:', len(alteradas))
           print('URLs publicas auditadas:', len(publicas))
           if erros:
               print('\nERROS ENCONTRADOS:')
-              for e in erros: print('-',e)
+              for e in erros:
+                  print('-',e)
               raise SystemExit(1)
           print('AUDITORIA FINAL: OK')
           PY
