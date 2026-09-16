@@ -22,24 +22,21 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re
+
           p = Path('index.html')
           html = p.read_text(encoding='utf-8')
-          antigo = '''<a href="imc.html"
-            ><span class="titulo-card"
-              ><img class="icone" src="home-icons/icone-idade.webp" alt="" width="64" height="64" loading="lazy" decoding="async" />Calculadora de
-              IMC</span'''
-          novo = '''<a href="imc.html"
-            ><span class="titulo-card"
-              ><img class="icone" src="home-icons/icone-imc.webp" alt="" width="64" height="64" loading="lazy" decoding="async" />Calculadora de
-              IMC</span'''
-          if antigo not in html:
-              raise SystemExit('Trecho do card de IMC nao encontrado')
-          html = html.replace(antigo, novo, 1)
-          if html.count('home-icons/icone-imc.webp') != 1:
+
+          padrao = re.compile(
+              r'(<a href="imc\.html".*?<img class="icone" src=")home-icons/icone-idade\.webp("[^>]*>Calculadora de\s*IMC)',
+              re.S
+          )
+          novo, n = padrao.subn(r'\1home-icons/icone-imc.webp\2', html, count=1)
+          if n != 1:
+              raise SystemExit(f'Card de IMC nao foi atualizado: {n}')
+          if novo.count('home-icons/icone-imc.webp') != 1:
               raise SystemExit('Validacao falhou: icone IMC deveria aparecer uma vez')
-          if 'href="imc.html"' not in html:
-              raise SystemExit('Validacao falhou: card de IMC ausente')
-          p.write_text(html, encoding='utf-8')
+          p.write_text(novo, encoding='utf-8')
           print('Icone de IMC atualizado com sucesso.')
           PY
 
