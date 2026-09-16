@@ -1,0 +1,69 @@
+name: SEO home intencao de busca
+
+on:
+  push:
+    paths:
+      - '.github/workflows/seo-home-intencao-busca.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  otimizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Ajustar SEO da home
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('index.html')
+          html = p.read_text(encoding='utf-8')
+
+          trocas = {
+            '<title>Ferramentas Gratuitas | Calcula Fácil</title>': '<title>Calculadoras Online Grátis | Calcula Fácil</title>',
+            'content="Calculadoras online gratuitas para porcentagem, tinta, concreto, combustível, finanças, conversões e tarefas do dia a dia."': 'content="Calculadoras online grátis para porcentagem, tinta, concreto, combustível, finanças, conversões e tarefas do dia a dia. Use sem cadastro."',
+            '<meta property="og:title" content="Ferramentas Gratuitas | Calcula Fácil" />': '<meta property="og:title" content="Calculadoras Online Grátis | Calcula Fácil" />',
+            '<meta property="og:description" content="Ferramentas gratuitas para cálculos de casa, dinheiro e dia a dia." />': '<meta property="og:description" content="Calculadoras online gratuitas para casa, dinheiro, obra, conversões e tarefas do dia a dia." />',
+            '"description":"Ferramentas gratuitas para cálculos de casa, dinheiro e dia a dia."': '"description":"Calculadoras online gratuitas para casa, dinheiro, obra, conversões e tarefas do dia a dia."',
+            '<h1>Ferramentas gratuitas</h1>': '<h1>Calculadoras online gratuitas</h1>',
+            'Calculadoras simples para casa, dinheiro e tarefas do dia a dia.\n            Escolha uma ferramenta e faça seu cálculo em poucos segundos.': 'Use calculadoras online grátis para porcentagem, finanças, obra, medidas, conversões e tarefas do dia a dia.\n            Escolha a ferramenta que precisa e faça seu cálculo em poucos segundos.',
+            '<h2>Encontre a ferramenta que precisa</h2>': '<h2>Escolha uma calculadora online</h2>'
+          }
+
+          for antigo, novo in trocas.items():
+              if antigo not in html:
+                  raise SystemExit(f'Trecho esperado nao encontrado: {antigo[:90]}')
+              html = html.replace(antigo, novo, 1)
+
+          p.write_text(html, encoding='utf-8')
+
+          # Validacoes finais
+          final = p.read_text(encoding='utf-8')
+          checks = [
+              '<title>Calculadoras Online Grátis | Calcula Fácil</title>',
+              '<h1>Calculadoras online gratuitas</h1>',
+              '<h2>Escolha uma calculadora online</h2>',
+              'Use calculadoras online grátis para porcentagem, finanças, obra, medidas, conversões e tarefas do dia a dia.'
+          ]
+          for c in checks:
+              if c not in final:
+                  raise SystemExit(f'Validacao falhou: {c}')
+
+          print('SEO da home ajustado com sucesso.')
+          PY
+
+      - name: Salvar alteracoes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Melhora intenção de busca da página inicial"
+          git push
