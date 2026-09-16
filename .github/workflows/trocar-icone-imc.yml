@@ -1,0 +1,53 @@
+name: Trocar icone IMC
+
+on:
+  push:
+    paths:
+      - '.github/workflows/trocar-icone-imc.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  aplicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Trocar apenas o icone de IMC
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          html = p.read_text(encoding='utf-8')
+          antigo = '''<a href="imc.html"
+            ><span class="titulo-card"
+              ><img class="icone" src="home-icons/icone-idade.webp" alt="" width="64" height="64" loading="lazy" decoding="async" />Calculadora de
+              IMC</span'''
+          novo = '''<a href="imc.html"
+            ><span class="titulo-card"
+              ><img class="icone" src="home-icons/icone-imc.webp" alt="" width="64" height="64" loading="lazy" decoding="async" />Calculadora de
+              IMC</span'''
+          if antigo not in html:
+              raise SystemExit('Trecho do card de IMC nao encontrado')
+          html = html.replace(antigo, novo, 1)
+          if html.count('home-icons/icone-imc.webp') != 1:
+              raise SystemExit('Validacao falhou: icone IMC deveria aparecer uma vez')
+          if 'href="imc.html"' not in html:
+              raise SystemExit('Validacao falhou: card de IMC ausente')
+          p.write_text(html, encoding='utf-8')
+          print('Icone de IMC atualizado com sucesso.')
+          PY
+
+      - name: Salvar alteracao
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Corrige icone da calculadora de IMC"
+          git push
