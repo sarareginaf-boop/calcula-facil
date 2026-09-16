@@ -1,0 +1,136 @@
+name: SEO links internos e ItemList
+
+on:
+  push:
+    paths:
+      - '.github/workflows/seo-links-internos.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  aplicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Aplicar links relacionados e ItemList
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, re
+
+          relacionadas = {
+            'area.html': ['comprimento.html','piso-rejunte.html','concreto.html'],
+            'cientifica.html': ['regra-de-tres.html','porcentagem.html','juros-compostos.html'],
+            'comprimento.html': ['area.html','volume.html','peso.html'],
+            'concreto.html': ['piso-rejunte.html','area.html','tinta.html'],
+            'conversor.html': ['viagem.html','fuso.html','economia.html'],
+            'culinaria.html': ['volume.html','peso.html','temperatura.html'],
+            'datas.html': ['idade.html','fuso.html','juros-compostos.html'],
+            'economia.html': ['juros-compostos.html','financiamento.html','porcentagem.html'],
+            'financiamento.html': ['juros-compostos.html','economia.html','porcentagem.html'],
+            'fuso.html': ['datas.html','viagem.html','conversor.html'],
+            'idade.html': ['datas.html','imc.html','fuso.html'],
+            'imc.html': ['peso.html','idade.html','comprimento.html'],
+            'juros-compostos.html': ['financiamento.html','economia.html','porcentagem.html'],
+            'peso.html': ['imc.html','culinaria.html','volume.html'],
+            'piso-rejunte.html': ['rodape.html','area.html','concreto.html'],
+            'porcentagem.html': ['juros-compostos.html','financiamento.html','regra-de-tres.html'],
+            'regra-de-tres.html': ['porcentagem.html','culinaria.html','tinta.html'],
+            'rodape.html': ['piso-rejunte.html','area.html','comprimento.html'],
+            'temperatura.html': ['culinaria.html','fuso.html','conversor.html'],
+            'tinta.html': ['area.html','piso-rejunte.html','concreto.html'],
+            'viagem.html': ['conversor.html','fuso.html','economia.html'],
+            'volume.html': ['culinaria.html','concreto.html','area.html'],
+          }
+
+          def titulo_limpo(nome):
+              html = Path(nome).read_text(encoding='utf-8')
+              m = re.search(r'<title>(.*?)</title>', html, re.S)
+              if not m:
+                  raise SystemExit(f'Titulo ausente em {nome}')
+              t = re.sub(r'\s*\|\s*Calcula Fácil\s*$', '', m.group(1)).strip()
+              return t
+
+          titulos = {nome: titulo_limpo(nome) for nome in relacionadas}
+
+          alteradas = 0
+          for nome, alvos in relacionadas.items():
+              p = Path(nome)
+              html = p.read_text(encoding='utf-8')
+              if 'class="calculadoras-relacionadas"' in html:
+                  print(f'{nome}: relacionadas ja existem')
+                  continue
+
+              links = []
+              for alvo in alvos:
+                  rotulo = titulos.get(alvo) or titulo_limpo(alvo)
+                  links.append(f'<a href="{alvo}">{rotulo}</a>')
+
+              bloco = (
+                '\n      <section class="explicacao calculadoras-relacionadas">\n'
+                '        <h2>Calculadoras relacionadas</h2>\n'
+                '        <p>Você também pode usar ' + ', '.join(links[:-1]) + ' e ' + links[-1] + '.</p>\n'
+                '      </section>\n'
+              )
+              if '</main>' not in html:
+                  raise SystemExit(f'{nome}: </main> ausente')
+              html = html.replace('</main>', bloco + '    </main>', 1)
+              p.write_text(html, encoding='utf-8')
+              alteradas += 1
+
+          # ItemList estruturado na home
+          home = Path('index.html')
+          html = home.read_text(encoding='utf-8')
+          if '"@type":"ItemList"' not in html and '"@type": "ItemList"' not in html:
+              ordem = list(relacionadas.keys())
+              itens = []
+              for i, nome in enumerate(ordem, start=1):
+                  itens.append({
+                    '@type':'ListItem',
+                    'position':i,
+                    'name':titulos[nome],
+                    'url':'https://calculafacilweb.com.br/' + nome
+                  })
+              data = {
+                '@context':'https://schema.org',
+                '@type':'ItemList',
+                'name':'Calculadoras online gratuitas do Calcula Fácil',
+                'itemListElement':itens
+              }
+              script = '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False, separators=(',',':')) + '</script>'
+              if '</head>' not in html:
+                  raise SystemExit('index.html: </head> ausente')
+              html = html.replace('</head>', script + '</head>', 1)
+              home.write_text(html, encoding='utf-8')
+              alteradas += 1
+
+          # Validacoes
+          for nome in relacionadas:
+              txt = Path(nome).read_text(encoding='utf-8')
+              if txt.count('class="calculadoras-relacionadas"') != 1:
+                  raise SystemExit(f'Validacao falhou em {nome}')
+          txt = home.read_text(encoding='utf-8')
+          if '"@type":"ItemList"' not in txt:
+              raise SystemExit('ItemList nao encontrado na home')
+
+          print(f'Arquivos alterados nesta execucao: {alteradas}')
+          PY
+
+      - name: Salvar alteracoes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html *.html
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteracao para salvar."
+            exit 0
+          fi
+          git commit -m "Fortalece links internos entre calculadoras"
+          git push
