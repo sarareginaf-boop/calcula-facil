@@ -54,16 +54,15 @@ jobs:
               m = re.search(r'<title>(.*?)</title>', html, re.S)
               if not m:
                   raise SystemExit(f'Titulo ausente em {nome}')
-              t = re.sub(r'\s*\|\s*Calcula Fácil\s*$', '', m.group(1)).strip()
-              return t
+              return re.sub(r'\s*\|\s*Calcula Fácil\s*$', '', m.group(1)).strip()
 
           titulos = {nome: titulo_limpo(nome) for nome in relacionadas}
-
           alteradas = 0
+
           for nome, alvos in relacionadas.items():
               p = Path(nome)
               html = p.read_text(encoding='utf-8')
-              if 'class="calculadoras-relacionadas"' in html:
+              if 'calculadoras-relacionadas' in html:
                   print(f'{nome}: relacionadas ja existem')
                   continue
 
@@ -84,13 +83,11 @@ jobs:
               p.write_text(html, encoding='utf-8')
               alteradas += 1
 
-          # ItemList estruturado na home
           home = Path('index.html')
           html = home.read_text(encoding='utf-8')
           if '"@type":"ItemList"' not in html and '"@type": "ItemList"' not in html:
-              ordem = list(relacionadas.keys())
               itens = []
-              for i, nome in enumerate(ordem, start=1):
+              for i, nome in enumerate(relacionadas.keys(), start=1):
                   itens.append({
                     '@type':'ListItem',
                     'position':i,
@@ -110,10 +107,9 @@ jobs:
               home.write_text(html, encoding='utf-8')
               alteradas += 1
 
-          # Validacoes
           for nome in relacionadas:
               txt = Path(nome).read_text(encoding='utf-8')
-              if txt.count('class="calculadoras-relacionadas"') != 1:
+              if txt.count('calculadoras-relacionadas') != 1:
                   raise SystemExit(f'Validacao falhou em {nome}')
           txt = home.read_text(encoding='utf-8')
           if '"@type":"ItemList"' not in txt:
