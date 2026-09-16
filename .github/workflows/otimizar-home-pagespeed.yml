@@ -1,0 +1,141 @@
+name: Otimizar home para PageSpeed
+
+on:
+  push:
+    paths:
+      - '.github/workflows/otimizar-home-pagespeed.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  otimizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Instalar Pillow
+        run: python -m pip install --quiet Pillow
+
+      - name: Criar icones leves e ajustar home
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageFile
+          import re
+          import sys
+
+          ImageFile.LOAD_TRUNCATED_IMAGES = True
+          raiz = Path('.')
+          destino = raiz / 'home-icons'
+          destino.mkdir(exist_ok=True)
+
+          fontes = [
+              'icone-tinta.webp', 'icone-moedas.webp', 'icone-temperatura.webp',
+              'icone-porcentagem.webp', 'icone-juros.webp', 'icone-idade.webp',
+              'icone-regra.webp', 'icone-piso.webp', 'icone-comprimento.webp',
+              'icone-peso.webp', 'icone-area.webp', 'icone-volume.webp',
+              'icone-viagem.webp', 'icone-culinaria.webp', 'icone-concreto.webp',
+              'icone-economia.webp', 'icone-fuso.webp', 'icone-datas.webp'
+          ]
+
+          dims = {}
+          for nome in fontes:
+              src = raiz / nome
+              if not src.exists():
+                  raise SystemExit(f'Arquivo de icone ausente: {nome}')
+              with Image.open(src) as img:
+                  img.load()
+                  # 128 px atende tela 3x para icone visual de 34 px sem transferir imagens gigantes.
+                  img.thumbnail((128, 128), Image.Resampling.LANCZOS)
+                  out = destino / nome
+                  img.save(out, 'WEBP', quality=78, method=6)
+                  dims[nome] = img.size
+                  print(f'{nome}: {src.stat().st_size} -> {out.stat().st_size} bytes, {img.size[0]}x{img.size[1]}')
+
+          index = raiz / 'index.html'
+          html = index.read_text(encoding='utf-8')
+
+          # Priorizar o LCP/hero.
+          if 'rel="preload" as="image" href="hero-ferramentas.jpg"' not in html:
+              html = html.replace(
+                  '<link rel="stylesheet" href="style.css" />',
+                  '<link rel="preload" as="image" href="hero-ferramentas.jpg" fetchpriority="high" />\n    <link rel="stylesheet" href="style.css" />'
+              )
+
+          hero_pat = re.compile(r'<img\s+class="hero-ilustracao".*?/>', re.S)
+          m = hero_pat.search(html)
+          if not m:
+              raise SystemExit('Imagem hero nao encontrada no index.html')
+          hero = m.group(0)
+          # Evita duplicar atributos caso a tarefa seja reexecutada.
+          hero = re.sub(r'\s+(?:fetchpriority|loading|decoding)="[^"]*"', '', hero)
+          hero = hero[:-2].rstrip() + ' fetchpriority="high" loading="eager" decoding="async" />'
+          html = html[:m.start()] + hero + html[m.end():]
+
+          # Alterar somente imagens dentro da grade de cards.
+          inicio = html.find('<div class="cards-links" id="lista-ferramentas">')
+          fim = html.find('</div>', inicio)
+          if inicio < 0 or fim < 0:
+              raise SystemExit('Grade de ferramentas nao encontrada')
+          bloco = html[inicio:fim+6]
+
+          def ajustar_card_img(match):
+              tag = match.group(0)
+              sm = re.search(r'src="(icone-[^"]+\.webp)"', tag)
+              if not sm:
+                  return tag
+              nome = sm.group(1)
+              if nome not in dims:
+                  return tag
+              w, h = dims[nome]
+              tag = re.sub(r'src="[^"]+"', f'src="home-icons/{nome}"', tag, count=1)
+              tag = re.sub(r'\s+width="[^"]*"', '', tag)
+              tag = re.sub(r'\s+height="[^"]*"', '', tag)
+              tag = re.sub(r'\s+loading="[^"]*"', '', tag)
+              tag = re.sub(r'\s+decoding="[^"]*"', '', tag)
+              if tag.endswith('/>'):
+                  return tag[:-2].rstrip() + f' width="{w}" height="{h}" loading="lazy" decoding="async" />'
+              return tag[:-1].rstrip() + f' width="{w}" height="{h}" loading="lazy" decoding="async">'
+
+          novo_bloco = re.sub(r'<img\b[^>]*>', ajustar_card_img, bloco, flags=re.S)
+          if novo_bloco == bloco:
+              raise SystemExit('Nenhuma imagem dos cards foi alterada')
+          html = html[:inicio] + novo_bloco + html[fim+6:]
+          index.write_text(html, encoding='utf-8')
+
+          # Contraste: preserva a identidade visual, mas passa a usar tons com contraste AA.
+          css_path = raiz / 'style.css'
+          css = css_path.read_text(encoding='utf-8')
+          css = css.replace('--verde: #10a37f;', '--verde: #087f63;')
+          css = css.replace('color: #627d98;', 'color: #526d82;')
+          css_path.write_text(css, encoding='utf-8')
+
+          # Validacoes basicas antes do commit.
+          final = index.read_text(encoding='utf-8')
+          if final.count('home-icons/') < 22:
+              raise SystemExit(f'Esperadas 22 referencias de icones leves; encontradas {final.count("home-icons/")}')
+          if 'fetchpriority="high"' not in final or 'loading="eager"' not in final:
+              raise SystemExit('Prioridade do hero nao foi aplicada')
+          if '--verde: #087f63;' not in css_path.read_text(encoding='utf-8'):
+              raise SystemExit('Contraste do verde nao foi atualizado')
+          print('Validacao concluida com sucesso.')
+          PY
+
+      - name: Salvar ajustes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html style.css home-icons/
+          git commit -m "Otimiza home para desempenho e acessibilidade"
+          git push
