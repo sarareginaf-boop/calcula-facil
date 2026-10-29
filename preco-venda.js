@@ -10,8 +10,9 @@ function calcularVenda({custo,outros,fixa,taxas,impostos,modo,preco,margem}) {
     preco=Math.ceil((custos/(1-percentual-margem/100))*100-1e-8)/100;
   }
   if(!Number.isFinite(preco)||preco<=0) throw Error('Informe um preço de venda maior que zero.');
-  const valorTaxas=preco*taxas/100,valorImpostos=preco*impostos/100;
-  const lucro=preco-custos-valorTaxas-valorImpostos;
+  const centavos=v=>Math.round((v+Number.EPSILON)*100)/100;
+  const valorTaxas=centavos(preco*taxas/100),valorImpostos=centavos(preco*impostos/100);
+  const lucro=centavos(preco-custos-valorTaxas-valorImpostos);
   const equilibrio=Math.ceil(custos/(1-percentual)*100-1e-8)/100;
   if(![lucro,equilibrio,valorTaxas,valorImpostos].every(Number.isFinite)) throw Error('Os valores informados são muito altos. Reduza os valores e tente novamente.');
   return {preco,custos,valorTaxas,valorImpostos,lucro,margem:lucro/preco*100,equilibrio,total:preco-lucro};
